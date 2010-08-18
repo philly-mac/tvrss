@@ -6,11 +6,11 @@
   - form_tag url(:episodes, :calendar), :method => :get do
     %div
       %span.name From
-      %span= text_field_tag :from_date, :value => (Date.today - 14)
+      %span= text_field_tag :from_date, :id => 'from_date', :value => (Date.today - 14)
     .clear
     %div
       %span.name To
-      %span= text_field_tag :to_date, :value => (Date.today - 7)
+      %span= text_field_tag :to_date, :id => 'to_date', :value => (Date.today - 7)
     .clear
     %div= submit_tag 'search'
 .clear
