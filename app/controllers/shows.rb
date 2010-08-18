@@ -23,9 +23,16 @@ Tvrss.controllers :shows do
     @show = Show.first(params[:id])
 
     if @show
+      @show.delete_episodes
       @show.destroy
     end
 
     redirect url_for(:shows, :index)
   end
+
+  get :search do
+    @searched_shows = Show.get_show_list(params[:show_name])
+    render 'shows/index'
+  end
 end
+

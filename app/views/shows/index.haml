@@ -1,10 +1,37 @@
 %h1 Shows
+%div
+  - form_tag url(:episodes, :calendar), :method => :get do
+    %div
+      %span from
+      %span= text_field_tag :from_date, :value => (Date.today - 7)
+    %div
+      %span from
+      %span= text_field_tag :to_date, :value => (Date.today)
+    %div= submit_tag 'search'
+
+%div
+  %h2 Show Search
+  - form_tag url(:shows, :search), :method => :get do
+    %div
+      %span Show Name
+      %span= text_field_tag :show_name
+    %div= submit_tag 'search'
+
+- if @searched_shows
+  %h2 Search Results
+  - @searched_shows.each do |searched_show|
+    %span= searched_show[:name]
+    %span= button_to('add', url(:shows, :create, :"show[tvr_show_id]" => searched_show[:tvr_show_id]), :method => :post)
+
 = link_to('Add', url(:shows, :new))
-%ul
-  - @shows.each do |show|
-    %li
-      = link_to(show.name, url(:episodes, :index, :id => show.id))
-      |
-      = link_to('edit', '')
-      |
-      = button_to('del', url(:shows, :destroy, :id => show.id), :method => :delete)
+
+- if @shows
+  %ul
+    - @shows.each do |show|
+      %li
+        %span= link_to(show.name, url(:episodes, :index, :id => show.id))
+        |
+        %span= link_to('edit', '')
+        |
+        %span= button_to('del', url(:shows, :destroy, :id => show.id), :method => :delete)
+
