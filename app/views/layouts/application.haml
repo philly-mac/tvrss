@@ -1,0 +1,12 @@
+!!! Strict
+%html
+  %head
+    %title= [@title, "Padrino Sample Blog"].compact.join(" | ")
+    = stylesheet_link_tag 'http://yui.yahooapis.com/3.1.1/build/cssreset/reset-min.css', 'application'
+    = javascript_include_tag 'jquery', 'application'
+    = yield_content :include
+  %body
+    %div.section
+      %ul.main_menu
+        %li= link_to('Home', url(:shows, :index))
+    = yield

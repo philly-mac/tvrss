@@ -1,12 +1,13 @@
 - if @show
-  %h1= "#{@show.name} Episodes"
-%ul
-  - @episodes.each do |episode|
-    %li
-      - if !@show
-        = episode.show.name
+  %div.section
+    %h1= "#{@show.name} Episodes"
+%div.section
+  %ul
+    - @episodes.each do |episode|
+      %li
+        - if !@show
+          = episode.show.name
+          |
+        = "#{episode.episode} - #{episode.title}"
         |
-      = "#{episode.episode} - #{episode.title}"
-      |
-      = episode.air_date
-
+        = episode.air_date

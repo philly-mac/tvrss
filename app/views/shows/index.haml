@@ -1,37 +1,48 @@
-%h1 Shows
-%div
+%div.section
+  %h1 Shows
+
+%div.section
+  %h2 Episode Search
   - form_tag url(:episodes, :calendar), :method => :get do
     %div
-      %span from
-      %span= text_field_tag :from_date, :value => (Date.today - 7)
+      %span.name From
+      %span= text_field_tag :from_date, :value => (Date.today - 14)
+    .clear
     %div
-      %span from
-      %span= text_field_tag :to_date, :value => (Date.today)
+      %span.name To
+      %span= text_field_tag :to_date, :value => (Date.today - 7)
+    .clear
     %div= submit_tag 'search'
+.clear
 
-%div
+%div.section
   %h2 Show Search
   - form_tag url(:shows, :search), :method => :get do
     %div
-      %span Show Name
+      %span.name Show Name
       %span= text_field_tag :show_name
+    .clear
     %div= submit_tag 'search'
 
 - if @searched_shows
-  %h2 Search Results
-  - @searched_shows.each do |searched_show|
-    %span= searched_show[:name]
-    %span= button_to('add', url(:shows, :create, :"show[tvr_show_id]" => searched_show[:tvr_show_id]), :method => :post)
-
-= link_to('Add', url(:shows, :new))
+  %div.section
+    %h2 Search Results
+    - @searched_shows.each do |searched_show|
+      %span.search_name= searched_show[:name]
+      %span= button_to('add', url(:shows, :create, :"show[tvr_show_id]" => searched_show[:tvr_show_id]), :method => :post)
+      .clear
 
 - if @shows
-  %ul
-    - @shows.each do |show|
-      %li
-        %span= link_to(show.name, url(:episodes, :index, :id => show.id))
-        |
-        %span= link_to('edit', '')
-        |
-        %span= button_to('del', url(:shows, :destroy, :id => show.id), :method => :delete)
+  %div.section
+    %ul
+      - change = false
+      - @shows.each do |show|
+        %li{:class => change ? 'highlight' : '' }
+          %span.name
+            = link_to(show.name, url(:episodes, :index, :id => show.id))
+          %span.name
+            = link_to('edit', '')
+          %span= button_to('del', url(:shows, :destroy, :id => show.id), :method => :delete)
+        - change = !change
+        .clear
 
