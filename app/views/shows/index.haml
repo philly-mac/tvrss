@@ -1,0 +1,10 @@
+%h1 Shows
+= link_to('Add', url(:shows, :new))
+%ul
+  - @shows.each do |show|
+    %li
+      = link_to(show.name, url(:episodes, :index, :id => show.id))
+      |
+      = link_to('edit', '')
+      |
+      = button_to('del', url(:shows, :destroy, :id => show.id), :method => :delete)

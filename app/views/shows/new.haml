@@ -1,0 +1,12 @@
+%div
+  - form_for @show, url(:shows, :create), :method => :post do |f|
+    %div
+      %span= f.label 'show_id'
+      %span= f.text_field :show_id
+    %div
+      %span= f.label :name
+      %span= f.text_field :name
+    %div
+      %span= f.label :url
+      %span= f.text_field :url
+    %div= submit_tag 'Save'

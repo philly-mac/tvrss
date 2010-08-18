@@ -11,6 +11,8 @@ gem 'dm-sqlite-adapter'
 gem 'data_mapper'
 gem 'nokogiri'
 
+gem 'rack-datamapper-session'
+
 # Testing
 group 'test' do
   #unit tests
