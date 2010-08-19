@@ -1,6 +1,6 @@
 Tvrss.controllers :shows do
   get :index do
-    @shows = Show.all
+    @shows = Show.all(:order => [ :name.asc])
     render 'shows/index'
   end
 
@@ -20,10 +20,10 @@ Tvrss.controllers :shows do
   end
 
   delete :destroy, :with => :id do
-    @show = Show.first(params[:id])
+    @show = Show.get(params[:id])
 
     if @show
-      @show.delete_episodes
+      @show.episodes.destroy
       @show.destroy
     end
 

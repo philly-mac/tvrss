@@ -13,10 +13,6 @@ class Show
   before :save, :fill_in_show_information
   after :save, :get_episodes
 
-  def delete_episodes
-    Episode.all({:show_id => self.id}).destroy
-  end
-
   def fill_in_show_information
     show = Show.get_show_xml(self.tvr_show_id)
     Show.populate_show_info(self, show) if show
