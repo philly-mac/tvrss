@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class Episode
   include DataMapper::Resource
 

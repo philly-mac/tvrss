@@ -3,6 +3,10 @@ class Tvrss < Padrino::Application
   register Padrino::Helpers
   register SassInitializer
 
+  get :index do
+    redirect url_for(:shows, :index)
+  end
+
 
   ##
   # Application configuration options
