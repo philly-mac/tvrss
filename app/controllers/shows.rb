@@ -22,9 +22,16 @@ Tvrss.controllers :shows do
   delete :destroy, :with => :id do
     @show = Show.get(params[:id])
 
+    confirm = params[:confirm]
+
     if @show
-      @show.episodes.destroy
-      @show.destroy
+      if confirm && confirm == 'true'
+
+        @show.episodes.destroy
+        @show.destroy
+      else
+        return render 'shows/confirm'
+      end
     end
 
     redirect url_for(:shows, :index)

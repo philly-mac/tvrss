@@ -47,7 +47,7 @@
             = link_to('Reimport Episode Info', url(:episodes, :reimport_episodes, :tvr_show_id => show.tvr_show_id))
           %span.name
             = link_to('Update Show Info', url(:shows, :reimport_show_info, :tvr_show_id => show.tvr_show_id))
-          %span=# button_to('del', url(:shows, :destroy, :id => show.id), :method => :delete, :confirm => "Are You Sure?")
+          %span= button_to('del', url(:shows, :destroy, :id => show.id), :method => :delete)
         - change = !change
         - i += 1
         .clear

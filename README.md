@@ -70,9 +70,3 @@ This is a list of technologies I used to build this app
 - haml
 - sass
 - www.tvrage.com xml service for the data
-
-# TODO
-- Display more info from the database
-- Add confirm delete
-- Update show info
-- All show update
