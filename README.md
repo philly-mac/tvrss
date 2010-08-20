@@ -1,6 +1,6 @@
 # About
 
-This is small web app that will allow you to search from a host of tv shows from various countries (in it is on tvrage.com you will be able to find it with this app),
+This is small web app that will allow you to search from a host of tv shows from various countries (if it is on tvrage.com you will be able to find it with this app),
 and import the air schedule to a local database. Then you can search between two dates and display an rss feed of the episodes
 that aired on those dates.
 
