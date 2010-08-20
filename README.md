@@ -17,6 +17,10 @@ is complicated, crowded and just didn't serve my needs. I need a balance of the 
 I am a developer, so I thought, why don't I just write a small web app that would do exactly what I want, using the data service from
 tvrage.com. So that is what I did.
 
+# Demo
+
+http://demo.tvrss.ivercore.com
+
 # 30 Second Install
 
 Depending on whether you have the required tools installed on your machine, you can get this app installed and usable in 30 seconds.
@@ -24,9 +28,9 @@ Heres how.
 
 ## prerequisites
 
-- ruby
+- ruby (rvm is the best and easiest way to install this)
 - rubygems
-- bundler (and preferably rvm)
+- bundler
 - git
 
 Everything should be installed automatically with the code below.
