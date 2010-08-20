@@ -19,7 +19,7 @@ tvrage.com. So that is what I did.
 
 # Demo
 
-http://demo.tvrss.ivercore.com
+[http://demo.tvrss.ivercore.com](http://demo.tvrss.ivercore.com)
 
 database wiped every hour
 
