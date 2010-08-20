@@ -23,7 +23,7 @@ tvrage.com. So that is what I did.
 
 database wiped every hour
 
-# 30 Second Install
+# 30 (or thereabouts) Second Install
 
 Depending on whether you have the required tools installed on your machine, you can get this app installed and usable in 30 seconds.
 Heres how.
