@@ -6,11 +6,11 @@
   - form_tag url(:episodes, :calendar, :format => :xml), :method => :get do
     %div
       %span.name From
-      %span= text_field_tag :from_date, :id => 'from_date', :value => (Date.today - 14)
+      %span= text_field_tag :from_date, :id => 'from_date', :value => (Date.today - 8)
     .clear
     %div
       %span.name To
-      %span= text_field_tag :to_date, :id => 'to_date', :value => (Date.today - 7)
+      %span= text_field_tag :to_date, :id => 'to_date', :value => (Date.today - 1)
     .clear
     %div= submit_tag 'search'
 .clear
@@ -46,7 +46,7 @@
           %span.name
             = link_to('Reimport Episode Info', url(:episodes, :reimport_episodes, :tvr_show_id => show.tvr_show_id))
           %span.name
-            = link_to('Update Show Info', '#')
+            = link_to('Update Show Info', url(:shows, :reimport_show_info, :tvr_show_id => show.tvr_show_id))
           %span=# button_to('del', url(:shows, :destroy, :id => show.id), :method => :delete, :confirm => "Are You Sure?")
         - change = !change
         - i += 1

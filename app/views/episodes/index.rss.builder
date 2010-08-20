@@ -16,10 +16,11 @@ xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
 
       xml.item do
         xml.link episode.url
-        xml.title show_name
+        xml.title "#{show_name} | #{episode.title}"
         xml.description <<EOF
           #{show_tag}<br />
-          Air date: #{episode.air_date.strftime("%d/%m/%Y") if episode.air_date}
+          Air date: #{episode.air_date.strftime("%d/%m/%Y") if episode.air_date}<br />
+          Status: #{show.show_status}
           <br /><br />
           #{link_to(show.name, show.url)}<br />
           #{link_to('isohunt', "http://isohunt.com/torrents/?ihq=#{CGI.escape(show_name)}", :target => '_blank')}

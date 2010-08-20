@@ -34,5 +34,10 @@ Tvrss.controllers :shows do
     @searched_shows = Show.get_show_list(params[:show_name])
     render 'shows/index'
   end
+
+  get :reimport_show_info do
+    Show.fill_in_show_information(params[:tvr_show_id])
+    redirect url_for(:shows, :index)
+  end
 end
 
