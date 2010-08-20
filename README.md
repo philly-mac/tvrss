@@ -1,12 +1,10 @@
 # About
-=======
 
 This is small web app that will allow you to search from a host of tv shows from various countries (in it is on tvrage.com you will be able to find it with this app),
 and import the air schedule to a local database. Then you can search between two dates and display an rss feed of the episodes
 that aired on those dates.
 
 # Why
-=====
 
 I used to use mytvrss.com, and while it is a good service, it never seems to have the new shows early enough, and they never
 responded to my request to add shows. Also when they did add new shows, they never really tweeted about it or had a way to say
@@ -20,10 +18,19 @@ I am a developer, so I thought, why don't I just write a small web app that woul
 tvrage.com. So that is what I did.
 
 # 30 Second Install
-===================
 
 Depending on whether you have the required tools installed on your machine, you can get this app installed and usable in 30 seconds.
 Heres how.
+
+## prerequisites
+
+- ruby
+- rubygems
+- bundler (and preferably rvm)
+- git
+
+Everything should be installed automatically with the code below.
+You may find that you have to install some other libraries for nokogiri which I use for the xml parsing
 
     git clone git://github.com/philly-mac/tvrss.git
     cd tvrss
@@ -36,7 +43,6 @@ Then browse to http://localhost:3000/
 Enjoy tvrss!
 
 # Features
-==========
 
 - Search for show and add it to your database
 - Show an rss feed of any past, current and future episodes of an show
@@ -46,7 +52,6 @@ Enjoy tvrss!
 - Show an rss feed of all episodes of all shows in your database between two dates
 
 # technologies
-==============
 
 This is a list of technologies I used to build this app
 
@@ -54,15 +59,14 @@ This is a list of technologies I used to build this app
 - ruby
 - padrino/sinatra
 - sqlite
+- nokogiri
 - jQuery
 - haml
 - sass
+- www.tvrage.com xml service for the data
 
-
-
-TODO
-* Write quick start guide
-* Display more info from the database
-* Add confirm delete
-* Update show info
-* All show update
+# TODO
+- Display more info from the database
+- Add confirm delete
+- Update show info
+- All show update
