@@ -44,8 +44,10 @@
           %span.name
             = link_to(show.name, url(:episodes, :index, :id => show.id))
           %span.name
-            = link_to('edit', '')
-          %span= button_to('del', url(:shows, :destroy, :id => show.id), :method => :delete, :confirm => "Are You Sure?")
+            = link_to('Reimport Episode Info', url(:episodes, :reimport_episodes, :tvr_show_id => show.tvr_show_id))
+          %span.name
+            = link_to('Update Show Info', '#')
+          %span=# button_to('del', url(:shows, :destroy, :id => show.id), :method => :delete, :confirm => "Are You Sure?")
         - change = !change
         - i += 1
         .clear

@@ -10,5 +10,6 @@
     %div.section
       %ul.main_menu
         %li= link_to('Home', url(:shows, :index))
-        %li= link_to('Reindex', url(:episodes, :reindex))
+        %li= link_to('Reimport All Episodes', url(:episodes, :reimport_episodes))
+        %li= link_to('Reimport All Show Info', '#')
     = yield

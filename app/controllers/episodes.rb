@@ -18,8 +18,8 @@ Tvrss.controllers :episodes do
     render 'episodes/index.rss'
   end
 
-  get :reindex do
-    Episode.import_episodes(true)
+  get :reimport_episodes do
+    Episode.import_episodes(true, params[:tvr_show_id])
     redirect url_for(:shows, :index)
   end
 end
