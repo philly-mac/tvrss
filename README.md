@@ -25,11 +25,11 @@ tvrage.com. So that is what I did.
 Depending on whether you have the required tools installed on your machine, you can get this app installed and usable in 30 seconds.
 Heres how.
 
-  git clone git://github.com/philly-mac/tvrss.git
-  cd tvrss
-  bundle install
-  padrino rake dm:auto:migrate
-  padrino start
+    git clone git://github.com/philly-mac/tvrss.git
+    cd tvrss
+    bundle install
+    padrino rake dm:auto:migrate
+    padrino start
 
 Then browse to http://localhost:3000/
 
