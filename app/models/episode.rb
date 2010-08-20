@@ -8,6 +8,7 @@ class Episode
   property :id,             Serial
   property :episode,        String
   property :season,         String
+  property :season_episode, String
   property :product_number, String
   property :air_date,       Date
   property :url,            Text
@@ -16,25 +17,38 @@ class Episode
   timestamps :at
 
   class << self
+    def pad_num(num)
+      ret = '00'
+      s = /(\d+)/.match(num)
+      if s
+        s = s[0].to_i
+        s = "0#{s}" if s.to_s.size == 1
+        ret = s
+      end
+      ret
+    end
+
     def import_episodes(force = false, tvr_show_id = nil)
       shows = tvr_show_id ? Show.all(:tvr_show_id => tvr_show_id) : Show.all
       shows.each do |show|
         doc = Nokogiri::XML(open("http://services.tvrage.com/feeds/episode_list.php?sid=#{show.tvr_show_id}"))
-        doc.css('Show Episodelist Season').each do |seasons|
-          seasons.css("episode").each do |episode|
-            epnum     = episode.css("epnum").first.content
-            seasonnum = episode.css("seasonnum").first.content
-            prodnum   = episode.css("prodnum").first.content
-            airdate   = Date.parse(episode.css("airdate").first.content) rescue nil
-            link      = episode.css("link").first.content
-            title     = episode.css("title").first.content
+        doc.css('Show Episodelist Season').each do |season|
+          season.css("episode").each do |episode|
+            epnum     = episode.at_css("epnum").content
+            season_no = season['no']
+            seasonnum = episode.at_css("seasonnum").content
+            prodnum   = episode.at_css("prodnum").content
+            airdate   = Date.parse(episode.at_css("airdate").content) rescue nil
+            link      = episode.at_css("link").content
+            title     = episode.at_css("title").content
 
-            episode = Episode.first({:episode => epnum, :season => seasonnum, :product_number => prodnum, :tvr_show_id => show.tvr_show_id})
+            episode = Episode.first(:season => season_no, :episode => epnum, :tvr_show_id => show.tvr_show_id)
 
             if force || !episode
               episode = Episode.new if !episode
+              episode.season         = season_no
               episode.episode        = epnum
-              episode.season         = seasonnum
+              episode.season_episode = seasonnum
               episode.product_number = prodnum
               episode.url            = link
               episode.air_date       = airdate
