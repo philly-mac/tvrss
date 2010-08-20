@@ -22,6 +22,8 @@ span {
   margin: 0 0 30px 20px; }
   .section .name {
     width: 200px; }
+  .section .num_index {
+    width: 50px; }
   .section .search_name {
     width: 300px; }
   .section .highlight {

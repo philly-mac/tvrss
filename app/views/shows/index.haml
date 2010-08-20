@@ -3,7 +3,7 @@
 
 %div.section
   %h2 Episode Search
-  - form_tag url(:episodes, :calendar), :method => :get do
+  - form_tag url(:episodes, :calendar, :format => :xml), :method => :get do
     %div
       %span.name From
       %span= text_field_tag :from_date, :id => 'from_date', :value => (Date.today - 14)
@@ -36,13 +36,17 @@
   %div.section
     %ul
       - change = false
+      - i = 1
+      %h2= "Current Shows (#{@shows.size})"
       - @shows.each do |show|
         %li{:class => change ? 'highlight' : '' }
+          %span.num_index= "#{i}."
           %span.name
             = link_to(show.name, url(:episodes, :index, :id => show.id))
           %span.name
             = link_to('edit', '')
-          %span= button_to('del', url(:shows, :destroy, :id => show.id), :method => :delete)
+          %span= button_to('del', url(:shows, :destroy, :id => show.id), :method => :delete, :confirm => "Are You Sure?")
         - change = !change
+        - i += 1
         .clear
 
