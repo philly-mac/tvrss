@@ -19,9 +19,9 @@ tvrage.com. So that is what I did.
 
 # Demo
 
-[http://demo.tvrss.ivercore.com](http://demo.tvrss.ivercore.com)
+Sponsored by Heroku ;)
 
-database wiped every hour
+[http://blooming-light-96.heroku.com/](http://blooming-light-96.heroku.com)
 
 # 30 (or thereabouts) Second Install
 
