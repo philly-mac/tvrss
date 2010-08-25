@@ -7,7 +7,9 @@
     = javascript_include_tag 'jquery-1.4.2.min', 'jquery-ui-1.8.4.custom.min', 'application'
     = yield_content :include
   %body
-    %div.section
+    = flash_tag :error,  :id => 'error-message' if flash[:error]
+    = flash_tag :notice, :id => 'notice-message' if flash[:notice]
+    .section
       %ul.main_menu
         %li= link_to('Home', url(:shows, :index))
         %li= link_to('Reimport All Episodes', url(:episodes, :reimport_episodes))

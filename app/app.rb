@@ -1,4 +1,7 @@
 class Tvrss < Padrino::Application
+  enable  :sessions
+  use Rack::Flash
+
   register Padrino::Mailer
   register Padrino::Helpers
   register SassInitializer
@@ -20,6 +23,8 @@ class Tvrss < Padrino::Application
   # disable :flash              # Disables rack-flash (enabled by default if sessions)
   # layout  :my_layout          # Layout can be in views/layouts/foo.ext or views/foo.ext (default :application)
   #
+
+
 
   ##
   # You can configure for a specified environment like:

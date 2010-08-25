@@ -15,6 +15,22 @@ h2 {
 .clear {
   clear: both; }
 
+#error-message {
+  padding: 10px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bolder;
+  margin: 10px;
+  background-color: #ef0808; }
+
+#notice-message {
+  padding: 10px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bolder;
+  margin: 10px;
+  background-color: #7ad78c; }
+
 span {
   float: left; }
 

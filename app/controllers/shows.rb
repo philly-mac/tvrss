@@ -15,8 +15,10 @@ Tvrss.controllers :shows do
     if @show.save
       redirect url_for(:shows, :index)
     else
-      render 'shows/new'
+      flash[:error] = "Error"
     end
+
+    redirect url_for(:shows, :index)
   end
 
   delete :destroy, :with => :id do

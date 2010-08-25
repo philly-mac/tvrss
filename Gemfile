@@ -2,7 +2,7 @@ source :rubygems
 
 # Project requirements
 gem 'rake'
-gem 'rack-flash'
+gem 'rack-flash', :git => "git://github.com/philly-mac/rack-flash.git"
 gem 'thin' # or mongrel
 
 # Component requirements
