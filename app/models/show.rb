@@ -4,14 +4,14 @@ class Show
   has n, :episodes
 
   property :id,          Serial
-  property :tvr_show_id, String
+  property :tvr_show_id, String, :required => true, :unique => true
   property :name,        String
   property :url,         Text
   property :show_status, String
   timestamps :at
 
-  before :save, :fill_in_my_show_information
-  after :save, :get_episodes
+  before :create, :fill_in_my_show_information
+  after :create, :get_episodes
 
   def fill_in_show_information
     show = Show.get_show_xml(self.tvr_show_id)
@@ -23,15 +23,19 @@ class Show
   end
 
   def fill_in_my_show_information
-    Show.fill_in_show_information(self.id)
+    Show.fill_in_show_information(self)
   end
 
   class << self
     def fill_in_show_information(tvr_show_id = nil)
-      shows = tvr_show_id ? Show.all(:tvr_show_id => tvr_show_id) : Show.all
+      if tvr_show_id
+        shows = tvr_show_id.is_a?(Show) ? [tvr_show_id] : Show.all(:tvr_show_id => tvr_show_id)
+      else
+        shows = Show.all
+      end
+
       shows.each do |this_show|
-        show = get_show_xml(this_show.tvr_show_id)
-        if show
+        if (show = get_show_xml(this_show.tvr_show_id))
           populate_show_info(this_show, show)
           this_show.save
         end
