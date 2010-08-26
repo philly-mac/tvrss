@@ -6,40 +6,43 @@ class Tvrss < Padrino::Application
   register Padrino::Helpers
   register SassInitializer
 
-  get :index do
+  def excluded_paths
+    {
+      '/authenticate' => [:post, :get],
+    }
+  end
+
+  def path_excluded?
+    if excluded_paths.has_key?(request.path)
+      return excluded_paths[request.path].include?(request.env['REQUEST_METHOD'].downcase.to_sym)
+    end
+
+    false
+  end
+
+  before do
+    unless path_excluded?
+      unless session[:logged_in]
+        redirect '/authenticate'
+      end
+    end
+  end
+
+  get :authenticate do
+    render '/authentication/login.html'
+  end
+
+  post :authenticate do
+    session[:logged_in] = (params[:username] == 'username' && params[:password] == 'password')
     redirect url_for(:shows, :index)
   end
 
+  get :logout do
+    session.delete(:logged_in)
+    redirect '/authenticate'
+  end
 
-  ##
-  # Application configuration options
-  #
-  # set :raise_errors, true     # Show exceptions (default for development)
-  # set :public, "foo/bar"      # Location for static assets (default root/public)
-  # set :reload, false          # Reload application files (default in development)
-  # set :default_builder, "foo" # Set a custom form builder (default 'StandardFormBuilder')
-  # set :locale_path, "bar"     # Set path for I18n translations (defaults to app/locale/)
-  # enable  :sessions           # Disabled by default
-  # disable :flash              # Disables rack-flash (enabled by default if sessions)
-  # layout  :my_layout          # Layout can be in views/layouts/foo.ext or views/foo.ext (default :application)
-  #
-
-
-
-  ##
-  # You can configure for a specified environment like:
-  #
-  #   configure :development do
-  #     set :foo, :bar
-  #     disable :asset_stamp # no asset timestamping for dev
-  #   end
-  #
-
-  ##
-  # You can manage errors like:
-  #
-  #   error 404 do
-  #     render 'errors/404'
-  #   end
-  #
+  get :index do
+    redirect url_for(:shows, :index)
+  end
 end

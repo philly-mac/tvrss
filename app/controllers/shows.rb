@@ -1,12 +1,12 @@
 Tvrss.controllers :shows do
   get :index do
     @shows = Show.all(:order => [ :name.asc])
-    render 'shows/index'
+    render 'shows/index.html'
   end
 
   get :new do
     @show = Show.new
-    render 'shows/new'
+    render 'shows/new.html'
   end
 
   post :create do
@@ -32,7 +32,7 @@ Tvrss.controllers :shows do
         @show.episodes.destroy
         @show.destroy
       else
-        return render 'shows/confirm'
+        return render 'shows/confirm.html'
       end
     end
 
@@ -41,7 +41,7 @@ Tvrss.controllers :shows do
 
   get :search do
     @searched_shows = Show.get_show_list(params[:show_name])
-    render 'shows/index'
+    render 'shows/index.html'
   end
 
   get :reimport_show_info do

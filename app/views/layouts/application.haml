@@ -14,4 +14,5 @@
         %li= link_to('Home', url(:shows, :index))
         %li= link_to('Reimport All Episodes', url(:episodes, :reimport_episodes))
         %li= link_to('Reimport All Show Info', url(:shows, :reimport_show_info))
+        %li= link_to('Logout', '/logout') if session[:logged_in]
     = yield
