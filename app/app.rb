@@ -1,3 +1,5 @@
+require "#{Padrino.root}/config/credentials"
+
 class Tvrss < Padrino::Application
   enable  :sessions
   use Rack::Flash
@@ -33,7 +35,7 @@ class Tvrss < Padrino::Application
   end
 
   post :authenticate do
-    session[:logged_in] = (params[:username] == 'username' && params[:password] == 'password')
+    session[:logged_in] = (params[:username] == USERNAME && params[:password] == PASSWORD)
     redirect url_for(:shows, :index)
   end
 

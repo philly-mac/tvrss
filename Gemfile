@@ -7,6 +7,7 @@ gem 'thin' # or mongrel
 
 # Component requirements
 gem 'haml'
+gem 'dm-builder-adapter'
 gem 'dm-mysql-adapter'
 #gem 'dm-postgres-adapter'
 gem 'data_mapper'

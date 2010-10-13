@@ -26,7 +26,7 @@ xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
           #{link_to('isohunt', "http://isohunt.com/torrents/?ihq=#{CGI.escape(show_name)}", :target => '_blank')}
           #{link_to('thepiratebay', "http://thepiratebay.org/search/#{CGI.escape(show_name)}", :target => '_blank')}
 EOF
-        xml.pubDate episode.air_date.to_s(:rfc822) if episode.air_date
+        xml.pubDate episode.air_date.to_s if episode.air_date
       end
     end
   end

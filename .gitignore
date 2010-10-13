@@ -1,4 +1,9 @@
 .DS_Store
+config/credentials.rb
+log
+tmp
+vendor/bundle
+vendor/ruby
 log/**/*
 tmp/**/*
 bin/*
@@ -7,3 +12,4 @@ vendor/gems/*
 .sass-cache/*
 db/*.db
 .rvmrc
+
