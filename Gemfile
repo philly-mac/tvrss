@@ -3,6 +3,7 @@ source :rubygems
 # Project requirements
 gem 'rake'
 gem 'rack-flash', :git => "git://github.com/philly-mac/rack-flash.git"
+gem 'deploy', :git => "git://github.com/philly-mac/deploy.git"
 gem 'thin' # or mongrel
 
 # Component requirements
@@ -31,3 +32,4 @@ end
 
 # Padrino
 gem 'padrino', "0.9.14"
+
