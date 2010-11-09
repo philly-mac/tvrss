@@ -6,7 +6,7 @@
   - form_tag url(:episodes, :calendar, :format => :xml), :method => :get do
     %div
       %span.name From
-      %span= text_field_tag :from_date, :id => 'from_date', :value => (Date.today - 8)
+      %span= text_field_tag :from_date, :id => 'from_date', :value => (Date.today - 7)
     .clear
     %div
       %span.name To
