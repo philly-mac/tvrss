@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/philly-mac/deploy.git
-  revision: 1c733a6ed4891ae386952cc9a900d791d7707b56
+  revision: eaf13edb6e96e18ee4d94dbb439842fd53e53153
   specs:
     deploy (0.0.1)
 
