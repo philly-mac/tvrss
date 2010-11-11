@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/philly-mac/deploy.git
-  revision: eaf13edb6e96e18ee4d94dbb439842fd53e53153
+  revision: 11133aa7c2f0225a1a4c20bf2d3a8ed80bedf891
   specs:
     deploy (0.0.1)
 
@@ -135,8 +135,8 @@ GEM
       mcmire-matchy
       rr (>= 0.10.5)
     rubyzip (0.9.4)
-    selenium-webdriver (0.0.29)
-      childprocess (>= 0.0.7)
+    selenium-webdriver (0.1.0)
+      childprocess (= 0.1.4)
       ffi (~> 0.6.3)
       json_pure
       rubyzip
