@@ -7,6 +7,7 @@ gem 'deploy', :git => "git://github.com/philly-mac/deploy.git"
 gem 'thin' # or mongrel
 
 # Component requirements
+gem 'builder'
 gem 'haml'
 gem 'dm-postgres-adapter'
 gem 'data_mapper'
@@ -29,5 +30,5 @@ group 'test' do
 end
 
 # Padrino
-gem 'padrino', "0.9.14"
+gem 'padrino', "0.9.18"
 
