@@ -14,20 +14,24 @@ xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
       show_tag = "S#{Episode.pad_num(episode.season)}E#{Episode.pad_num(episode.season_episode)}"
       show_name = "#{episode.show.name} #{show_tag}"
 
+      show_tag_alt = "#{episode.season}x#{Episode.pad_num(episode.season_episode)}"
+      show_name_alt = "#{episode.show.name} #{show_tag_alt}"
+
       xml.item do
         xml.link episode.url
         xml.title "#{show_name} | #{episode.title}"
         xml.description <<EOF
-          #{show_tag}<br />
           Air date: #{episode.air_date.strftime("%d/%m/%Y") if episode.air_date}<br />
-          Status: #{show.show_status}
+          #{link_to(show.name, show.url)} - #{show.show_status}
           <br /><br />
-          #{link_to(show.name, show.url)}<br />
-          #{link_to('isohunt', "http://isohunt.com/torrents/?ihq=#{CGI.escape(show_name)}", :target => '_blank')}
+          ORIG - #{link_to('isohunt', "http://isohunt.com/torrents/?ihq=#{CGI.escape(show_name)}", :target => '_blank')}
           #{link_to('thepiratebay', "http://thepiratebay.org/search/#{CGI.escape(show_name)}", :target => '_blank')}
+          |
+          ALT - #{link_to('isohunt', "http://isohunt.com/torrents/?ihq=#{CGI.escape(show_name_alt)}", :target => '_blank')}
+          #{link_to('thepiratebay', "http://thepiratebay.org/search/#{CGI.escape(show_name_alt)}", :target => '_blank')}
 EOF
-        xml.pubDate episode.air_date.to_s if episode.air_date
       end
     end
   end
 end
+

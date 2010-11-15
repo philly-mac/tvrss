@@ -35,6 +35,8 @@ class Tvrss < Padrino::Application
   end
 
   post :authenticate do
+    USERNAME = 'username' unless defined?(USERNAME)
+    PASSWORD = 'password' unless defined?(PASSWORD)
     session[:logged_in] = (params[:username] == USERNAME && params[:password] == PASSWORD)
     redirect url_for(:shows, :index)
   end
@@ -48,3 +50,4 @@ class Tvrss < Padrino::Application
     redirect url_for(:shows, :index)
   end
 end
+

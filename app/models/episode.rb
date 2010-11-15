@@ -6,14 +6,14 @@ class Episode
   belongs_to :show
 
   property :id,             Serial
-  property :episode,        String
-  property :season,         String
-  property :season_episode, String
-  property :product_number, String
+  property :episode,        String, :length => 255
+  property :season,         String, :length => 255
+  property :season_episode, String, :length => 255
+  property :product_number, String, :length => 255
   property :air_date,       Date
   property :url,            Text
-  property :title,          String
-  property :tvr_show_id,    String
+  property :title,          String, :length => 255
+  property :tvr_show_id,    String, :length => 255
   timestamps :at
 
   class << self
