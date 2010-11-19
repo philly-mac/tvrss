@@ -1,5 +1,4 @@
 .DS_Store
-config/credentials.rb
 log
 tmp
 vendor/bundle
