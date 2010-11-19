@@ -21,7 +21,7 @@ tvrage.com. So that is what I did.
 
 Sponsored by Heroku ;)
 
-[http://blooming-light-96.heroku.com/](http://blooming-light-96.heroku.com)
+[http://ivercore-tvrss.heroku.com/](http://ivercore-tvrss.heroku.com)
 
 # 30 (or thereabouts) Second Install
 
@@ -41,8 +41,9 @@ You may find that you have to install some other libraries for nokogiri which I 
     git clone git://github.com/philly-mac/tvrss.git
     cd tvrss
     bundle install
-    padrino rake dm:auto:migrate
-    padrino start
+    bundle exec padrino rake dm:create
+    bundle exec padrino rake dm:auto:migrate
+    bundle exec padrino start
 
 Then browse to http://localhost:3000/
 
@@ -70,3 +71,4 @@ This is a list of technologies I used to build this app
 - haml
 - sass
 - www.tvrage.com xml service for the data
+
