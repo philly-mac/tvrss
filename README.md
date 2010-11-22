@@ -40,6 +40,7 @@ You may find that you have to install some other libraries for nokogiri which I 
 
     git clone git://github.com/philly-mac/tvrss.git
     cd tvrss
+    git checkout sqlite
     bundle install
     bundle exec padrino rake dm:create
     bundle exec padrino rake dm:auto:migrate
