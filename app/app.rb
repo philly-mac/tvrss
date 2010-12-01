@@ -2,7 +2,7 @@ require "#{Padrino.root}/config/credentials"
 
 class Tvrss < Padrino::Application
   enable  :sessions
-  use Rack::Flash
+  use Rack::Flash if Padrino.env == :production
 
   register Padrino::Mailer
   register Padrino::Helpers
