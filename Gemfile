@@ -9,6 +9,7 @@ gem 'thin' # or mongrel
 # Component requirements
 gem 'builder'
 gem 'haml'
+gem 'dm-sqlite-adapter'
 gem 'dm-postgres-adapter'
 gem 'data_mapper'
 gem 'nokogiri'

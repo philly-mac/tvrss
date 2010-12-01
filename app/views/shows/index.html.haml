@@ -28,7 +28,8 @@
   %div.section
     %h2 Search Results
     - @searched_shows.each do |searched_show|
-      %span.search_name= searched_show[:name]
+      %span.search_name
+        = link_to(searched_show[:name], searched_show[:url], :target => '_blank')
       %span= button_to('add', url(:shows, :create, :"show[tvr_show_id]" => searched_show[:tvr_show_id]), :method => :post)
       .clear
 

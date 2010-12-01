@@ -49,6 +49,7 @@ class Show
         results.css('show').each do |tvr_show|
           tvr_shows << {
             :name        => tvr_show.at_css("name").content,
+            :url         => tvr_show.at_css("link").content,
             :tvr_show_id => tvr_show.at_css("showid").content,
           }
         end
