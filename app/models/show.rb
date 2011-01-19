@@ -71,7 +71,7 @@ class Show
       show.name = show_info.at_css("showname").content
       show.url  = show_info.at_css("showlink").content
       show.show_status = show_info.at_css("status").content
-      show.genres = show_info.css("genres").map{|g| g }.join(", ")
+      show.genres = show_info.at_css("genres").css("genre").map{|g| g.content }.join(", ")
     end
   end
 end
