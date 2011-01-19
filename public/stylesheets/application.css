@@ -32,17 +32,22 @@ h2 {
   background-color: #7ad78c; }
 
 span {
-  float: left; }
+  float: left;
+  border: 1px solid black;
+  line-height: 25px;
+  padding: 3px; }
 
 .section {
   margin: 0 0 30px 20px; }
   .section .name {
     width: 200px; }
   .section .num_index {
-    width: 50px; }
+    width: 50px;
+    padding: 3px; }
   .section .search_name {
-    width: 300px; }
-  .section .highlight {
+    width: 300px;
+    padding: 3px; }
+  .section .highlight span {
     background-color: #8dbfd9; }
 
 .main_menu a {

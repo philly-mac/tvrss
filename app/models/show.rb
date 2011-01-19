@@ -5,9 +5,10 @@ class Show
 
   property :id,          Serial
   property :tvr_show_id, String, :required => true, :unique => true
-  property :name,        String
+  property :name,        String, :length => 255
   property :url,         Text
-  property :show_status, String
+  property :show_status, String, :length => 255
+  property :genres,      String, :length => 255
   timestamps :at
 
   before :create, :fill_in_my_show_information
@@ -70,6 +71,7 @@ class Show
       show.name = show_info.at_css("showname").content
       show.url  = show_info.at_css("showlink").content
       show.show_status = show_info.at_css("status").content
+      show.genres = show_info.css("genres").map{|g| g }.join(", ")
     end
   end
 end

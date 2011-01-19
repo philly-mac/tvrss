@@ -13,6 +13,7 @@ gem 'dm-sqlite-adapter'
 gem 'dm-postgres-adapter'
 gem 'data_mapper'
 gem 'nokogiri'
+gem 'configatron'
 
 gem 'rack-datamapper-session'
 
@@ -31,5 +32,6 @@ group 'test' do
 end
 
 # Padrino
-gem 'padrino', "0.9.18"
+gem 'sinatra', '1.1.0'
+gem 'padrino', "0.9.19"
 
