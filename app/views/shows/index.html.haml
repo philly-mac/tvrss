@@ -6,11 +6,11 @@
   - form_tag calendar_path, :method => :get do
     %div
       %span.name From
-      %span= text_field_tag :from_date, (Date.today - 1), :id => 'from_date'
+      %span= text_field_tag :from_date, (Date.today - 7), :id => 'from_date'
     .clear
     %div
       %span.name To
-      %span= text_field_tag :to_date, (Date.today - 7), :id => 'to_date'
+      %span= text_field_tag :to_date, (Date.today - 1), :id => 'to_date'
     .clear
     %div= submit_tag 'search'
 .clear

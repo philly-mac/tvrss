@@ -45,11 +45,11 @@ module ApplicationHelper
   end
 
   def pirate_bay_link(episode)
-    link_to('thepiratebay', "http://thepiratebay.org/search/#{CGI.escape(show_name(episode))}", :target => '_blank')
+    link_to('thepiratebay', "http://thepiratebay.org/search/#{CGI.escape(show_name_alt(episode))}", :target => '_blank')
   end
 
   def pirate_bay_link_alt(episode)
-    link_to('thepiratebay', "http://thepiratebay.org/search/#{CGI.escape(show_name(episode))}", :target => '_blank')
+    link_to('thepiratebay', "http://thepiratebay.org/search/#{CGI.escape(show_name_alt(episode))}", :target => '_blank')
   end
 
   def description(episode)
