@@ -13,14 +13,15 @@ module ApplicationHelper
   end
 
   def title(counter, episode)
-    "#{counter}) #{show_name(episode)} | #{episode.title}"
+    "#{counter}) #{episode_name(episode)} | #{episode.title}"
   end
 
   def search_name(episode)
+    puts ">>>>>>>>>>>>>>>> #{episode.search_as.inspect}"
     episode.search_as.present? ? episode.search_as : episode.show.name
   end
 
-  def show_name(episode)
+  def episode_name(episode)
     "#{search_name(episode)} #{episode_tag(episode)}"
   end
 
@@ -33,23 +34,23 @@ module ApplicationHelper
   end
 
   def episode_name_alt(episode)
-    "#{episode.search_name} #{episode.episode_tag_alt}"
+    "#{search_name(episode)} #{episode_tag_alt(episode)}"
   end
 
   def iso_link(episode)
-    "ORIG - #{link_to('isohunt', "http://isohunt.com/torrents/?ihq=#{CGI.escape(show_name(episode))}", :target => '_blank')}"
-  end
-
-  def iso_link_alt(episode)
-    "ALT - #{link_to('isohunt', "http://isohunt.com/torrents/?ihq=#{CGI.escape(show_name(episode))}", :target => '_blank')}"
+    "ORIG - #{link_to('isohunt', "http://isohunt.com/torrents/?ihq=#{CGI.escape(episode_name(episode))}", :target => '_blank')}"
   end
 
   def pirate_bay_link(episode)
-    link_to('thepiratebay', "http://thepiratebay.org/search/#{CGI.escape(show_name_alt(episode))}", :target => '_blank')
+    link_to('thepiratebay', "http://thepiratebay.org/search/#{CGI.escape(episode_name(episode))}", :target => '_blank')
+  end
+
+  def iso_link_alt(episode)
+    "ALT - #{link_to('isohunt', "http://isohunt.com/torrents/?ihq=#{CGI.escape(episode_name_alt(episode))}", :target => '_blank')}"
   end
 
   def pirate_bay_link_alt(episode)
-    link_to('thepiratebay', "http://thepiratebay.org/search/#{CGI.escape(show_name_alt(episode))}", :target => '_blank')
+    link_to('thepiratebay', "http://thepiratebay.org/search/#{CGI.escape(episode_name_alt(episode))}", :target => '_blank')
   end
 
   def description(episode)
