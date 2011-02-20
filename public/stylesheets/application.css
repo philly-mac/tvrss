@@ -1,19 +1,25 @@
 body {
   font-size: 12px;
-  font-family: sans-serif, verdana, arial; }
+  font-family: sans-serif, verdana, arial;
+}
 
 h1 {
   font-size: 18px;
   font-weight: bold;
-  padding: 0 0 10px 0; }
+  margin: 10px;
+  padding: 10px;
+}
 
 h2 {
   font-size: 16px;
   font-weight: bold;
-  padding: 0 0 10px 0; }
+  margin: 10px;
+  padding: 10px;
+}
 
 .clear {
-  clear: both; }
+  clear: both;
+}
 
 #error-message {
   padding: 10px;
@@ -21,7 +27,8 @@ h2 {
   font-size: 15px;
   font-weight: bolder;
   margin: 10px;
-  background-color: #ef0808; }
+  background-color: #ef0808;
+}
 
 #notice-message {
   padding: 10px;
@@ -29,26 +36,39 @@ h2 {
   font-size: 15px;
   font-weight: bolder;
   margin: 10px;
-  background-color: #7ad78c; }
+  background-color: #7ad78c;
+}
 
 span {
   float: left;
   border: 1px solid black;
   line-height: 25px;
-  padding: 3px; }
+  padding: 3px;
+}
 
 .section {
-  margin: 0 0 30px 20px; }
-  .section .name {
-    width: 200px; }
-  .section .num_index {
-    width: 50px;
-    padding: 3px; }
-  .section .search_name {
-    width: 300px;
-    padding: 3px; }
-  .section .highlight span {
-    background-color: #8dbfd9; }
+  margin: 0 0 30px 20px;
+}
+.section .name {
+  width: 200px;
+}
+.section .num_index {
+  width: 50px;
+  padding: 3px;
+}
+.section .search_name {
+  width: 300px;
+  padding: 3px;
+}
+.section .highlight span {
+  background-color: #8dbfd9;
+}
 
 .main_menu a {
-  text-decoration: none; }
+  text-decoration: none;
+}
+
+.episode {
+  margin: 10px;
+  padding: 10px;
+}

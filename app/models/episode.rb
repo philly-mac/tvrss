@@ -14,6 +14,7 @@ class Episode
   property :url,            Text
   property :title,          String, :length => 255
   property :tvr_show_id,    String, :length => 255
+  property :search_as,      String, :length => 255
   timestamps :at
 
   class << self

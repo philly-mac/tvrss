@@ -1,0 +1,20 @@
+defaults: &defaults
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+
+test:
+  database: db/tvrss_test.db
+  <<: *defaults
+
+development:
+  database: db/tvrss_dev.db
+  <<: *defaults
+
+production:
+  database: tvrss
+  adapter:  postgres
+  username: postgres
+  password: postgres
+  host:     localhost
+  pool: 5

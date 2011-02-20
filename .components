@@ -1,7 +1,0 @@
---- 
-:orm: datamapper
-:test: bacon
-:mock: rr
-:script: none
-:renderer: haml
-:stylesheet: sass

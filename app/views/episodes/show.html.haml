@@ -1,0 +1,11 @@
+%h1 TV Shows RSS
+%h2!= title_description(@show, @from_date, @to_date)
+
+- counter = @episodes.size
+
+- @episodes.each do |episode|
+  .episode
+    %h3.title= title(counter, episode)
+    %p.description!=  description(episode)
+    %br/
+  - counter -= 1
