@@ -1,4 +1,5 @@
-cred_file = "#{Rails.root}/config/credentials"
+cred_file = "#{Rails.root}/config/credentials.rb"
+
 require cred_file if File.exists?(cred_file)
 
 class ApplicationController < ActionController::Base
@@ -11,7 +12,7 @@ class ApplicationController < ActionController::Base
     if logged_in?
       redirect_to shows_path
     else
-      render '/site/index'
+      render :template => '/site/index'
     end
   end
 
@@ -27,7 +28,7 @@ class ApplicationController < ActionController::Base
     if logged_in?
       redirect_to shows_path
     else
-      render :action => 'index'
+      render :template => '/site/index'
     end
   end
 
@@ -46,3 +47,4 @@ class ApplicationController < ActionController::Base
   end
 
 end
+
