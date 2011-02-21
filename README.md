@@ -46,6 +46,7 @@ You may find that you have to install some other libraries for nokogiri which I 
     bundle exec rails start
 
 default username = username
+<br />
 default password = password
 
 Then browse to http://localhost:3000/
