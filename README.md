@@ -64,7 +64,7 @@ This is a list of technologies I used to build this app
 
 - git (of course)
 - ruby
-- padrino/sinatra
+- rails 3
 - sqlite
 - nokogiri
 - jQuery
