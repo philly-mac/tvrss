@@ -41,9 +41,9 @@ You may find that you have to install some other libraries for nokogiri which I 
     git clone git://github.com/philly-mac/tvrss.git
     cd tvrss
     bundle install
-    bundle exec padrino rake dm:create
-    bundle exec padrino rake dm:auto:migrate
-    bundle exec padrino start
+    bundle exec rake db:create
+    bundle exec rake db:automigrate
+    bundle exec rails start
 
 Then browse to http://localhost:3000/
 
