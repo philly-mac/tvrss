@@ -45,11 +45,12 @@ You may find that you have to install some other libraries for nokogiri which I 
     bundle exec rake db:automigrate
     bundle exec rails start
 
+
+Then browse to http://localhost:3000/
+
 default username = username
 
 default password = password
-
-Then browse to http://localhost:3000/
 
 Enjoy tvrss!
 
