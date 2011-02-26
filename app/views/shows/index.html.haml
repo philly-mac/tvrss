@@ -3,7 +3,7 @@
 
 %div.section
   %h2 Episode Search
-  - form_tag calendar_path, :method => :get do
+  = form_tag calendar_path, :method => :get do
     %div
       %span.name From
       %span= text_field_tag :from_date, (Date.today - 7), :id => 'from_date'
@@ -17,7 +17,7 @@
 
 %div.section
   %h2 Show Search
-  - form_tag search_shows_path, :method => :get do
+  = form_tag search_shows_path, :method => :get do
     %div
       %span.name Show Name
       %span= text_field_tag :show_name
@@ -45,6 +45,10 @@
           %span.name
             = link_to(show.name, episode_path(show.id))
             = link_to("rss", episode_path(:format => :rss, :id => show.id))
+          %span.search_as
+            = form_tag url_for(:controller => "shows", :action => "update", :id => show.id), :method => :put do
+              = text_field_tag "show[search_as]", search_name(show)
+              = submit_tag 'set'
           %span.name
             = link_to('Reimport Episode Info', reimport_episode_path(show.tvr_show_id))
           %span.name

@@ -52,6 +52,9 @@ span {
 .section .name {
   width: 200px;
 }
+.section .search_as {
+  width: 230px;
+}
 .section .num_index {
   width: 50px;
   padding: 3px;

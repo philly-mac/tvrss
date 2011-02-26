@@ -9,6 +9,7 @@ class Show
   property :url,         Text
   property :show_status, String, :length => 255
   property :genres,      String, :length => 255
+  property :search_as,   String, :length => 255
   timestamps :at
 
   before :create, :fill_in_my_show_information

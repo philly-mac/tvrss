@@ -1,7 +1,7 @@
 class ShowsController < ApplicationController
 
   def index
-    @shows = Show.all(:order => [ :name.asc])
+    load_shows
     render :action => 'index'
   end
 
@@ -12,13 +12,7 @@ class ShowsController < ApplicationController
 
   def create
     @show = Show.new(params[:show])
-
-    if @show.save
-      redirect_to shows_path
-    else
-      alert = "Error"
-    end
-
+    @show.save ? notice = 'Saved' : alert = "Error"
     redirect_to shows_path
   end
 
@@ -40,6 +34,14 @@ class ShowsController < ApplicationController
     redirect_to shows_path
   end
 
+  def update
+    @show = Show.get(params[:id])
+    @show.attributes = params[:show]
+    @show.save ? notice = 'Saved' : alert = "Error"
+    load_shows
+    redirect_to shows_path
+  end
+
   def search
     @searched_shows = Show.get_show_list(params[:show_name])
     render :action => 'index'
@@ -48,6 +50,10 @@ class ShowsController < ApplicationController
   def reimport
     Show.fill_in_show_information(params[:tvr_show_id])
     redirect_to shows_path
+  end
+
+  def load_shows
+    @shows = Show.all(:order => [ :name.asc])
   end
 end
 
