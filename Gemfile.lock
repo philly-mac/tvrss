@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/philly-mac/deploy.git
-  revision: e6d852e28b99b75341ac0043f429040c30407bd1
+  revision: 95b64f29eed238f3e0dd6fb2dede3120d9aa8960
   specs:
-    deploy (0.0.6)
+    deploy (0.0.8)
 
 GEM
   remote: http://rubygems.org/
@@ -35,7 +35,7 @@ GEM
       activesupport (= 3.0.4)
     activesupport (3.0.4)
     addressable (2.2.4)
-    arel (2.0.8)
+    arel (2.0.9)
     builder (2.1.2)
     configatron (2.6.4)
       yamler (>= 0.1.0)

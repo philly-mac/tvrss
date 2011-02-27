@@ -46,24 +46,30 @@ span {
   padding: 3px;
 }
 
-.section {
-  margin: 0 0 30px 20px;
+table {
+  border: 1px solid black;
 }
-.section .name {
+table tr {
+  border: 1px solid black;
+}
+table tr td {
+  border: 1px solid black;
+}
+table .name {
   width: 200px;
 }
-.section .search_as {
+table .search_as {
   width: 230px;
 }
-.section .num_index {
+table .num_index {
   width: 50px;
   padding: 3px;
 }
-.section .search_name {
+table .search_name {
   width: 300px;
   padding: 3px;
 }
-.section .highlight span {
+table .highlight {
   background-color: #8dbfd9;
 }
 
