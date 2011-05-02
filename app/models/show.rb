@@ -4,16 +4,17 @@ class Show
   has n, :episodes
 
   property :id,          Serial
-  property :tvr_show_id, String, :required => true, :unique => true
-  property :name,        String, :length => 255
+  property :tvr_show_id, String,  :required => true, :unique => true
+  property :name,        String,  :length   => 255
   property :url,         Text
-  property :show_status, String, :length => 255
-  property :genres,      String, :length => 255
-  property :search_as,   String, :length => 255
+  property :show_status, String,  :length   => 255
+  property :genres,      String,  :length   => 255
+  property :search_as,   String,  :length   => 255
+  property :independent, Boolean, :default  => false
   timestamps :at
 
-  before :create, :fill_in_my_show_information
-  after :create, :get_episodes
+  before :create { fill_in_my_show_information unless independent? }
+  after  :create { get_episodes unless independent? }
 
   def fill_in_show_information
     show = Show.get_show_xml(self.tvr_show_id)
