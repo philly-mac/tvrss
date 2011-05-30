@@ -18,7 +18,7 @@
 
 %h2 Show Search
 = form_tag search_shows_path, :method => :get do
-  %table
+  %table.borders
     %tr
       %td.name Show Name
       %td= text_field_tag :show_name
@@ -34,7 +34,7 @@
 
 - if @shows
   %h2= "Current Shows (#{@shows.size})"
-  %table
+  %table.borders
     %tr
       %td &nbsp;
       %td Show

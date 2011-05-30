@@ -14,7 +14,7 @@ class Episode
   property :url,            Text
   property :title,          String,   :length  => 255
   property :tvr_show_id,    String,   :length  => 255
-  property :watched,        Booklean, :default => false
+  property :watched,        Boolean, :default => false
   timestamps :at
 
   class << self

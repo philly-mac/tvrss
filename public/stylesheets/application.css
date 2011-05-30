@@ -41,35 +41,35 @@ h2 {
 
 span {
   float: left;
-  border: 1px solid black;
   line-height: 25px;
   padding: 3px;
 }
 
-table {
+table.borders {
   border: 1px solid black;
 }
-table tr {
+table.borders tr {
   border: 1px solid black;
 }
-table tr td {
+table.borders tr td {
   border: 1px solid black;
+  padding: 3px;
 }
-table .name {
+table.borders .name {
   width: 200px;
 }
-table .search_as {
+table.borders .search_as {
   width: 230px;
 }
-table .num_index {
+table.borders .num_index {
   width: 50px;
   padding: 3px;
 }
-table .search_name {
+table.borders .search_name {
   width: 300px;
   padding: 3px;
 }
-table .highlight {
+table.borders .highlight {
   background-color: #8dbfd9;
 }
 
@@ -80,4 +80,10 @@ table .highlight {
 .episode {
   margin: 10px;
   padding: 10px;
+}
+
+#login {
+  margin: 200px auto;
+  width: 300px;
+  height: 100px;
 }

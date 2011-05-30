@@ -13,8 +13,14 @@ class Show
   property :independent, Boolean, :default  => false
   timestamps :at
 
-  before :create { fill_in_my_show_information unless independent? }
-  after  :create { get_episodes unless independent? }
+  before :create do
+    fill_in_my_show_information unless independent?
+  end
+
+  after  :create do
+    get_episodes unless independent?
+  end
+
 
   def fill_in_show_information
     show = Show.get_show_xml(self.tvr_show_id)

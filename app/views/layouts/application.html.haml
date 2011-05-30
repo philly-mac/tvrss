@@ -10,11 +10,12 @@
     - if flash[:alert]
       #error-message= alert
     - if flash[:notice]
-      #notice-message= notice 
-    .section
-      %ul.main_menu
-        %li= link_to('Home', shows_path)
-        %li= link_to('Reimport All Episodes', reimport_episodes_path)
-        %li= link_to('Reimport All Show Info', reimport_shows_path)
-        %li= link_to('Logout', logout_path) if logged_in?
+      #notice-message= notice
+    - if logged_in?
+      .section
+        %ul.main_menu
+          %li= link_to('Home', shows_path)
+          %li= link_to('Reimport All Episodes', reimport_episodes_path)
+          %li= link_to('Reimport All Show Info', reimport_shows_path)
+          %li= link_to('Logout', logout_path) if logged_in?
     = yield

@@ -1,10 +1,11 @@
-- form_tag authenticate_path, :method => :post do
-  %div
-    %span.name Username
-    %span= text_field_tag :username
-  .clear
-  %div
-    %span.name Password
-    %span= password_field_tag :password
-  .clear
-  %div= submit_tag 'search'
+= form_tag authenticate_path, :method => :post do
+  #login
+    %div
+      %span.name Username
+      %span= text_field_tag :username
+    .clear
+    %div
+      %span.name Password
+      %span= password_field_tag :password
+    .clear
+    %div= submit_tag 'Login'
