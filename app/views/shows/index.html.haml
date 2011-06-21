@@ -38,6 +38,7 @@
     %tr
       %td &nbsp;
       %td Show
+      %td rss
       %td Search As
       %td Reimport Episode Info
       %td Update Show Info
@@ -49,6 +50,7 @@
         %td.num_index= "#{i}."
         %td.name{:class => change ? 'highlight' : '' }
           = link_to(show.name, episode_path(show.id))
+        %td{:class => change ? 'highlight' : '' }
           = link_to("rss", episode_path(:format => :rss, :id => show.id))
         %td.search_as{:class => change ? 'highlight' : '' }
           = form_tag url_for(:controller => "shows", :action => "update", :id => show.id), :method => :put do
@@ -62,3 +64,4 @@
           = button_to('del', url_for(:action => 'destroy', :controller => 'shows',:id => show.id), :method => :delete)
       - change = !change
       - i += 1
+
