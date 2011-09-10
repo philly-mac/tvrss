@@ -30,7 +30,7 @@ gem 'ruby_parser'
 gem 'sass'
 gem "bundler"
 gem 'configatron'
-gem 'deploy', :git => "git://github.com/philly-mac/deploy.git"
+gem 'deploy', :git => "git://github.com/protonet/deploy.git"
 gem 'nokogiri'
 gem 'configatron'
-
+gem 'typhoeus'

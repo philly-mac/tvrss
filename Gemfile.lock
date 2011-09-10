@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/philly-mac/deploy.git
-  revision: 95b64f29eed238f3e0dd6fb2dede3120d9aa8960
+  remote: git://github.com/protonet/deploy.git
+  revision: 109cd7a4782c96c396cd4ff9a696653fa3b571c7
   specs:
-    deploy (0.0.8)
+    deploy (1.0)
 
 GEM
   remote: http://rubygems.org/
@@ -144,6 +144,9 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
+    typhoeus (0.2.4)
+      mime-types
+      mime-types
     tzinfo (0.3.24)
     uuidtools (2.1.2)
     yamler (0.1.0)
@@ -177,3 +180,4 @@ DEPENDENCIES
   railties (= 3.0.4)
   ruby_parser
   sass
+  typhoeus

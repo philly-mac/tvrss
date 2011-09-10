@@ -1,5 +1,3 @@
-require 'open-uri'
-
 class Episode
   include DataMapper::Resource
 
@@ -30,10 +28,33 @@ class Episode
     end
 
     def import_episodes(force = false, tvr_show_id = nil)
+      requests = []
+
       shows = tvr_show_id ? Show.all(:tvr_show_id => tvr_show_id) : Show.all
+
+      hydra = Typhoeus::Hydra.new
+
+      # Set up the requests
+      Rails.logger.info "Setting up requests"
       shows.each do |show|
-        doc = Nokogiri::XML(open("http://services.tvrage.com/feeds/episode_list.php?sid=#{show.tvr_show_id}"))
-        doc.css('Show Episodelist Season').each do |season|
+        requests << Typhoeus::Request.new("http://services.tvrage.com/feeds/episode_list.php?sid=#{show.tvr_show_id}")
+        requests.last.on_complete do |response|
+          [show, Nokogiri::XML(response.body)]
+        end
+      end
+
+      # Queue each of the reuests
+      Rails.logger.info "Queuing up requests"
+      requests.each{|requests| hydra.queue requests}
+
+      # Run them
+      Rails.logger.info "Running up requests"
+      hydra.run
+
+      requests.each do|request|
+        show, xml_document = request.handled_response
+
+        xml_document.css('Show Episodelist Season').each do |season|
           season.css("episode").each do |episode|
             epnum     = episode.at_css("epnum").content
             season_no = season['no']
@@ -58,9 +79,9 @@ class Episode
               show.episodes << episode
 
               if episode.save
-                #puts "new episode saved #{episode.id}"
+                Rails.logger.info "new episode saved #{episode.id}"
               else
-                #puts "Failed to saved #{episode.errors.inspect}"
+                Rails.logger.error "Failed to saved #{episode.errors.inspect}"
               end
             end
           end
