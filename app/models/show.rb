@@ -53,26 +53,33 @@ class Show
 
     def get_show_list(search_term)
       tvr_shows = []
-      if (doc = Nokogiri::XML(open("http://services.tvrage.com/feeds/search.php?show=#{CGI.escape(search_term)}")))
-        results = doc.css('Results').first
-        results.css('show').each do |tvr_show|
-          tvr_shows << {
-            :name        => tvr_show.at_css("name").content,
-            :url         => tvr_show.at_css("link").content,
-            :tvr_show_id => tvr_show.at_css("showid").content,
-          }
+
+      if xml = show_xml("http://services.tvrage.com/feeds/search.php", { :params => {:show => "#{CGI.escape(search_term)}" }})
+        if (doc = Nokogiri::XML(xml))
+          results = doc.css('Results').first
+          results.css('show').each do |tvr_show|
+            tvr_shows << {
+              :name        => tvr_show.at_css("name").content,
+              :url         => tvr_show.at_css("link").content,
+              :tvr_show_id => tvr_show.at_css("showid").content,
+            }
+          end
         end
+      else
+        alert = "The was a problem getting the xml"
       end
 
       tvr_shows
     end
 
     def get_show_xml(tvr_show_id)
-      if (doc = Nokogiri::XML(open("http://services.tvrage.com/feeds/showinfo.php?sid=#{tvr_show_id}")))
+      xml = show_xml("http://services.tvrage.com/feeds/showinfo.php", { :params => {:sid => "#{tvr_show_id}" }})
+      if xml && (doc = Nokogiri::XML(xml))
         show = doc.at_css('Showinfo')
         return show if show
+      else
+        nil
       end
-      nil
     end
 
     def populate_show_info(show, show_info)
@@ -80,6 +87,19 @@ class Show
       show.url  = show_info.at_css("showlink").content
       show.show_status = show_info.at_css("status").content
       show.genres = show_info.at_css("genres").css("genre").map{|g| g.content }.join(", ")
+    end
+
+    def cancelled
+      Show.all(:show_status.like => "%cancelled%" ) |
+        Show.all(:show_status.like => "%ended%" ) |
+        Show.all(:show_status.like => "%canceled%" )
+    end
+
+  private
+
+    def show_xml(url, params = {})
+      response = Typhoeus::Request.get(url, params)
+      return response.success? ? response.body : nil
     end
   end
 end

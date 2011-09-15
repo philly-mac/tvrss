@@ -37,7 +37,7 @@ class Episode
       # Set up the requests
       Rails.logger.info "Setting up requests"
       shows.each do |show|
-        requests << Typhoeus::Request.new("http://services.tvrage.com/feeds/episode_list.php?sid=#{show.tvr_show_id}")
+        requests << Typhoeus::Request.new("http://services.tvrage.com/feeds/episode_list.php?sid=#{show.tvr_show_id}", {:timeout => 600000})
         requests.last.on_complete do |response|
           [show, Nokogiri::XML(response.body)]
         end

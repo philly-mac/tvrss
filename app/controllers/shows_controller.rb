@@ -55,5 +55,10 @@ class ShowsController < ApplicationController
   def load_shows
     @shows = Show.all(:order => [ :name.asc])
   end
+
+  def cancelled
+    @shows = Show.cancelled
+    render :action => 'index'
+  end
 end
 

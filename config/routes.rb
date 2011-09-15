@@ -10,6 +10,7 @@ Tvrss::Application.routes.draw do
     collection do
       get :reimport
       get :search
+      get :cancelled
     end
 
     member do

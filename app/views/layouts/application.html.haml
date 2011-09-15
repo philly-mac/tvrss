@@ -17,5 +17,6 @@
           %li= link_to('Home', shows_path)
           %li= link_to('Reimport All Episodes', reimport_episodes_path)
           %li= link_to('Reimport All Show Info', reimport_shows_path)
+          %li= link_to('Cancelled Shows', cancelled_shows_path)
           %li= link_to('Logout', logout_path) if logged_in?
     = yield
