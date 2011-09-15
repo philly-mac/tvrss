@@ -90,9 +90,9 @@ class Show
     end
 
     def cancelled
-      Show.all(:show_status.like => "%cancelled%" ) |
-        Show.all(:show_status.like => "%ended%" ) |
-        Show.all(:show_status.like => "%canceled%" )
+      Show.all(:conditions => ['LOWER(name) LIKE ?',"%cancelled%"]) |
+        Show.all(:conditions => ['LOWER(name) LIKE ?',"%ended%"]) |
+        Show.all(:conditions => ['LOWER(name) LIKE ?',"%canceled%"])
     end
 
   private
