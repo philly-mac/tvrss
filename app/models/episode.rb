@@ -32,6 +32,8 @@ class Episode
 
       shows = tvr_show_id ? Show.all(:tvr_show_id => tvr_show_id) : Show.all
 
+      Episode.all(:show_id => shows.map(&:id)).destroy
+
       hydra = Typhoeus::Hydra.new
 
       # Set up the requests
@@ -64,26 +66,26 @@ class Episode
             link      = episode.at_css("link").content
             title     = episode.at_css("title").content
 
-            episode = Episode.first(:season => season_no, :episode => epnum, :tvr_show_id => show.tvr_show_id)
+            episode = Episode.new({
+              :season         => season_no,
+              :episode        => epnum,
+              :season_episode => seasonnum,
+              :product_number => prodnum,
+              :url            => link,
+              :air_date       => airdate,
+              :title          => title,
+              :tvr_show_id    => show.tvr_show_id
+            })
 
-            if force || !episode
-              episode = Episode.new if !episode
-              episode.season         = season_no
-              episode.episode        = epnum
-              episode.season_episode = seasonnum
-              episode.product_number = prodnum
-              episode.url            = link
-              episode.air_date       = airdate
-              episode.title          = title
-              episode.tvr_show_id    = show.tvr_show_id
-              show.episodes << episode
+            show.episodes << episode
 
-              if episode.save
-                Rails.logger.info "new episode saved #{episode.id}"
-              else
-                Rails.logger.error "Failed to saved #{episode.errors.inspect}"
-              end
+            if episode.save
+              Rails.logger.info "new episode saved #{episode.id}"
+            else
+              Rails.logger.error "Failed to saved #{episode.errors.inspect}"
             end
+
+
           end
         end
       end
