@@ -91,7 +91,11 @@ class Show
         field = show_info.at_css(fields.last)
         show.send :"#{fields.first}=", field.content if field
       end
-      show.genres = show_info.at_css("genres").css("genre").map{|g| g.content }.join(", ")
+      if genres = show_info.at_css("genres")
+        if genre = genres.css("genre")
+          show.genres = genre.map{|g| g.content }.join(", ")
+        end
+      end
     end
 
     def cancelled
