@@ -82,10 +82,15 @@ class Show
       end
     end
 
+    def show_mappings
+      [[:name,'showname'],[:url, 'showlink'], [:show_status, 'status']]
+    end
+
     def populate_show_info(show, show_info)
-      show.name = show_info.at_css("showname").content
-      show.url  = show_info.at_css("showlink").content
-      show.show_status = show_info.at_css("status").content
+      show_mappings.each do |fields|
+        field = show_info.at_css(fields.last)
+        show.send :"#{fields.first}=", field.content if field
+      end
       show.genres = show_info.at_css("genres").css("genre").map{|g| g.content }.join(", ")
     end
 
