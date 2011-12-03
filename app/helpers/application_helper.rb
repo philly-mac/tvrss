@@ -36,6 +36,10 @@ module ApplicationHelper
     "#{episode.season}x#{Episode.pad_num(episode.season_episode)}"
   end
 
+  def eztv_link(show, episode)
+    link_to('eztv', "http://www.ezrss.it/search/index.php?show_name=#{CGI.escape(search_name(show))}&season=#{episode.season}&episode=#{episode.season_episode}", :target => '_blank')
+  end
+
   def iso_link(episode)
     link_to('isohunt', "http://isohunt.com/torrents/?ihq=#{CGI.escape(show_name(episode))}", :target => '_blank')
   end
@@ -58,7 +62,7 @@ module ApplicationHelper
       Air date: #{episode.air_date.strftime("%d/%m/%Y") if episode.air_date}<br />
       #{link_to(show.name, show.url)} - #{show.genres} - #{show.show_status}
       <br /><br />
-      ORIG - #{iso_link(episode)} #{pirate_bay_link(episode)} | ALT - #{iso_link_alt(episode)} #{pirate_bay_link_alt(episode)}
+      ORIG - #{eztv_link(episode.show, episode)} #{iso_link(episode)} #{pirate_bay_link(episode)} | ALT - #{iso_link_alt(episode)} #{pirate_bay_link_alt(episode)}
 EOF
   end
 end
