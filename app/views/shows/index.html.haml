@@ -61,7 +61,7 @@
         %td.name{:class => change ? 'highlight' : '' }
           = link_to('Update Show Info', reimport_show_path(show.tvr_show_id))
         %td{:class => change ? 'highlight' : '' }
-          = button_to('del', url_for(:action => 'destroy', :controller => 'shows',:id => show.id), :method => :delete)
+          = button_to('del', url_for(:action => 'destroy', :controller => 'shows',:id => show.id), :method => :delete, :confirm => 'Are you sure?')
       - change = !change
       - i += 1
 

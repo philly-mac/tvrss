@@ -17,18 +17,9 @@ class ShowsController < ApplicationController
   end
 
   def destroy
-    @show = Show.get(params[:id])
-
-    confirm = params[:confirm]
-
-    if @show
-      if confirm && confirm == 'true'
-
-        @show.episodes.destroy
-        @show.destroy
-      else
-        return render 'shows/confirm.html'
-      end
+    if @show = Show.get(params[:id])
+      @show.episodes.destroy
+      @show.destroy
     end
 
     redirect_to shows_path
