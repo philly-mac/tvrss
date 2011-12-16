@@ -26,7 +26,11 @@ class EpisodesController < ApplicationController
   end
 
   def reimport
-    Episode.import_episodes(true, params[:tvr_show_id])
+    if Episode.import_episodes(true, params[:tvr_show_id])
+      flash[:notice] = "Successful"
+    else
+      flash[:alert] = "Something went wrong"
+    end
     redirect_to shows_path
   end
 end

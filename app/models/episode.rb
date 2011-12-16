@@ -29,6 +29,7 @@ class Episode
 
     def import_episodes(force = false, tvr_show_id = nil)
       requests = []
+      success = true
 
       shows = tvr_show_id ? Show.all(:tvr_show_id => tvr_show_id) : Show.all
 
@@ -41,7 +42,11 @@ class Episode
       shows.each do |show|
         requests << Typhoeus::Request.new("http://services.tvrage.com/feeds/episode_list.php?sid=#{show.tvr_show_id}", {:timeout => 600000})
         requests.last.on_complete do |response|
-          [show, Nokogiri::XML(response.body)]
+          if response.success?
+            [show, Nokogiri::XML(response.body)]
+          else
+            [nil, nil]
+          end
         end
       end
 
@@ -56,39 +61,45 @@ class Episode
       requests.each do|request|
         show, xml_document = request.handled_response
 
-        xml_document.css('Show Episodelist Season').each do |season|
-          season.css("episode").each do |episode|
-            epnum     = episode.at_css("epnum").content
-            season_no = season['no']
-            seasonnum = episode.at_css("seasonnum").content
-            prodnum   = episode.at_css("prodnum").content
-            airdate   = Date.parse(episode.at_css("airdate").content) rescue nil
-            link      = episode.at_css("link").content
-            title     = episode.at_css("title").content
+        if show
 
-            episode = Episode.new({
-              :season         => season_no,
-              :episode        => epnum,
-              :season_episode => seasonnum,
-              :product_number => prodnum,
-              :url            => link,
-              :air_date       => airdate,
-              :title          => title,
-              :tvr_show_id    => show.tvr_show_id
-            })
+          xml_document.css('Show Episodelist Season').each do |season|
+            season.css("episode").each do |episode|
+              epnum     = episode.at_css("epnum").content
+              season_no = season['no']
+              seasonnum = episode.at_css("seasonnum").content
+              prodnum   = episode.at_css("prodnum").content
+              airdate   = Date.parse(episode.at_css("airdate").content) rescue nil
+              link      = episode.at_css("link").content
+              title     = episode.at_css("title").content
 
-            show.episodes << episode
+              episode = Episode.new({
+                :season         => season_no,
+                :episode        => epnum,
+                :season_episode => seasonnum,
+                :product_number => prodnum,
+                :url            => link,
+                :air_date       => airdate,
+                :title          => title,
+                :tvr_show_id    => show.tvr_show_id
+              })
 
-            if episode.save
-              Rails.logger.info "new episode saved #{episode.id}"
-            else
-              Rails.logger.error "Failed to saved #{episode.errors.inspect}"
+              show.episodes << episode
+
+              if episode.save
+                Rails.logger.info "new episode saved #{episode.id}"
+              else
+                Rails.logger.error "Failed to saved #{episode.errors.inspect}"
+              end
             end
-
-
           end
+
+        else
+          success = false
         end
       end
+
+      success
     end
   end
 end
