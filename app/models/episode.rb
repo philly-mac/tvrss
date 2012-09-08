@@ -85,7 +85,7 @@ class Episode
           counter += 1
 
           if counter < 5
-            Rails.logger.info "#{show.name} trying again"
+            Rails.logger.error "#{show.name} trying again"
           else
             failed_shows << show.name
           end

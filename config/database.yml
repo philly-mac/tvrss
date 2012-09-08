@@ -16,5 +16,5 @@ production:
   adapter:  postgres
   username: postgres
   password: postgres
-  host:     localhost
+  host:     109.235.148.154
   pool: 5
