@@ -1,0 +1,12 @@
+%legend Login
+= form_tag(url_for(:controller => 'sessions', :action => 'create'), :method => :post, :class => 'form-horizontal') do
+  .control-group
+    = label_tag :email, nil, :class => "control-label"
+    .controls= text_field_tag "email", @email, :placeholder => "john.doe@optomlocum.com"
+
+  .control-group
+    = label_tag :password, nil, :class => "control-label"
+    .controls= password_field_tag :password
+
+  .control-group
+    .controls= button_tag 'Login', :class => "btn btn-primary", :id => 'login'

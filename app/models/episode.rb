@@ -1,7 +1,7 @@
-class Episode
+class Episode < Sequel::Model
   include DataMapper::Resource
 
-  belongs_to :show
+  many_to_one :show
 
   property :id,             Serial
   property :episode,        String,   :length  => 255

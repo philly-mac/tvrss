@@ -1,17 +1,10 @@
-class Show
+class Show < Sequel::Model
   include DataMapper::Resource
 
-  has n, :episodes
+  # Associations
 
-  property :id,          Serial
-  property :tvr_show_id, String,  :required => true, :unique => true
-  property :name,        String,  :length   => 255
-  property :url,         Text
-  property :show_status, String,  :length   => 255
-  property :genres,      String,  :length   => 255
-  property :search_as,   String,  :length   => 255
-  property :independent, Boolean, :default  => false
-  timestamps :at
+  many_to_many :users
+  one_to_many  :episodes
 
   before :create do
     fill_in_my_show_information unless independent?

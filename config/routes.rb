@@ -1,31 +1,19 @@
 Tvrss::Application.routes.draw do
 
-  root :to => "application#index"
+  root :to => "shows#index"
 
-  match 'authenticate' => 'application#authenticate', :via => :post
-  match 'logout'       => 'application#logout',       :via => :get
-  match 'calendar'     => 'episodes#calendar',        :via => :get
+  match 'logout'   => 'sessions#destroy',  :as => :logout,   :via => :get
+  match 'login'    => 'sessions#new',      :as => :login,    :via => :get
+  match 'calendar' => 'episodes#calendar', :as => :calendar, :via => :get
 
-  resources :shows do
-    collection do
-      get :reimport
-      get :search
-      get :cancelled
-    end
+  resources :users do
+    resources :shows do
+      collection do
+        get :search
+        get :cancelled
+      end
 
-    member do
-      get :reimport
-    end
-  end
-
-  resources :episodes do
-    collection do
-      get :reimport
-    end
-
-    member do
-      get :reimport
+      resources :episodes
     end
   end
-
 end

@@ -1,0 +1,9 @@
+%legend
+  Login Details
+  - if owner?(user)
+    %small!= "(#{link_to('Edit', edit_user_path)})"
+.clear
+
+%dl.dl-horizontal
+  %dt Email:
+  %dd= user.email

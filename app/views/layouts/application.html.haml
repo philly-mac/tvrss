@@ -1,23 +1,13 @@
 !!! Strict
-%html
+%html{:lang => 'en'}
   %head
     %title IverCore TV Rss
-    = stylesheet_link_tag 'reset-min', 'application'
-    = stylesheet_link_tag 'ui-lightness/jquery-ui-1.8.4.custom'
-    = javascript_include_tag 'jquery.min', 'jquery-ui-1.8.4.custom.min', 'jquery_ujs', 'application'
-    = #yield_content :include
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %link{:href => "/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
+    = stylesheet_link_tag    'application'
+    = javascript_include_tag 'application'
+
   %body
-    - if flash[:alert]
-      #error-message= alert
-    - if flash[:notice]
-      #notice-message= notice
-    - if logged_in?
-      .section
-        %ul.main_menu
-          %li= link_to('Home', shows_path)
-          %li |
-          %li= link_to('Reimport All Episodes', reimport_episodes_path)
-          %li= link_to('Reimport All Show Info', reimport_shows_path)
-          %li= link_to('Cancelled Shows', cancelled_shows_path)
-          %li= link_to('Logout', logout_path) if logged_in?
-    = yield
+    = render :partial => 'shared/flash', :object => flash
+    = render :partial => 'shared/menu'
+    .container-fluid= yield

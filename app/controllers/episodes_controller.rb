@@ -1,5 +1,10 @@
 class EpisodesController < ApplicationController
 
+  before_filter :authenticate_user!
+
+  load_and_authorize_resource :show, :except => [:calendar]
+  load_and_authorize_resource :episode, :through => :show, :except => [:calendar]
+
   def show
     @show = Show.get params[:id]
     @episodes = @show.episodes(:order => [ :air_date.desc ])
@@ -26,7 +31,7 @@ class EpisodesController < ApplicationController
   end
 
   def reimport
-    if Episode.import_episodes(true, params[:tvr_show_id])
+    if Episode.import_episodes(params[:tvr_show_id])
       flash[:notice] = "Successful"
     else
       flash[:alert] = "Something went wrong"

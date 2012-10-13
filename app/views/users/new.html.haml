@@ -1,0 +1,7 @@
+= error_messages(@user.errors)
+
+%legend Register
+
+= form_for(@user, :html => {:class => 'form-horizontal'}) do |form|
+  = render :partial => '/users/form', :locals => {:form => form, :user => @user}
+  .controls= button_tag 'Register', :class => "btn btn-primary", :id => 'update-button'
