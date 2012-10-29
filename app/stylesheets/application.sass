@@ -1,0 +1,79 @@
+body
+  font-size: 12px
+  font-family: sans-serif, verdana, arial
+
+h1
+  font-size: 18px
+  font-weight: bold
+  margin: 10px
+  padding: 10px
+
+h2
+  font-size: 16px
+  font-weight: bold
+  margin: 10px
+  padding: 10px
+
+.clear
+  clear: both
+
+@mixin notice-style
+  padding: 10px
+  text-align: center
+  font-size: 15px
+  font-weight: bolder
+  margin: 10px
+
+#error-message
+  @include notice-style
+  background-color: #ef0808
+
+#notice-message
+  @include notice-style
+  background-color: #7ad78c
+
+span
+  float: left
+  line-height: 25px
+  padding: 3px
+
+table.borders
+  border: 1px solid black
+  tr
+    border: 1px solid black
+    td
+      border: 1px solid black
+      padding: 3px
+
+  .name
+    width: 200px
+
+  .search_as
+    width: 230px
+
+  .num_index
+    width: 50px
+    padding: 3px
+
+  .search_name
+    width: 300px
+    padding: 3px
+
+  .highlight
+    background-color: #8dbfd9
+
+.main_menu
+  a
+    text-decoration: none
+
+.episode
+  margin: 10px
+  padding: 10px
+
+  p
+    .description
+
+#login
+  margin: 200px auto
+  width: 300px
+  height: 100px

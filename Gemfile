@@ -21,6 +21,7 @@ gem 'pg'
 # Component requirements
 gem 'cancan'
 gem 'simple_auth', :git => 'git://github.com/philly-mac/simple_auth.git'
+gem 'bcrypt-ruby',            :require => "bcrypt"
 gem 'hpricot'
 gem 'ruby_parser'
 gem "bundler"

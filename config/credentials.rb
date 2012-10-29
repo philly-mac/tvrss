@@ -1,3 +1,0 @@
-USERNAME="username"
-PASSWORD="password"
-

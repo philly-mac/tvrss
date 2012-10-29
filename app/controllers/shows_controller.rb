@@ -2,7 +2,7 @@ class ShowsController < ApplicationController
 
   before_filter :authenticate_user!
 
-  load_and_authorize_resource :show, :except => [:searchZ]
+  load_and_authorize_resource :show, :except => [:search]
 
   def index
   end

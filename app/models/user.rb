@@ -9,6 +9,22 @@ class User < Sequel::Model
   many_to_many :shows
   many_to_many :watched_episodes, :join_table => :watched_shows_users
 
+  def add_role(role)
+
+    unless role.is_a?(Role)
+      role = Role.where(:name => role.to_s).first
+    end
+
+    if role
+      super role
+      save
+    end
+  end
+
+  def has_role?(role)
+    roles.any?{|r|r.name == role.to_s}
+  end
+
 protected
 
   # Validations

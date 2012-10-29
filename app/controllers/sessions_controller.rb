@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   def index
     flash.keep
     if logged_in?
-      redirect_to "shows#index"
+      redirect_to user_shows_path(current_user)
     else
       render 'new'
     end
