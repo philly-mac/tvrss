@@ -8,7 +8,7 @@ class ShowsController < ApplicationController
   end
 
   def search
-    @searched_shows = Show.get_show_list(params[:show_name])
+    @searched_shows = Show.search_db(params[:show_name])
     render :action => 'index'
   end
 

@@ -1,19 +1,6 @@
 class Episode < Sequel::Model
-  include DataMapper::Resource
 
   many_to_one :show
-
-  property :id,             Serial
-  property :episode,        String,   :length  => 255
-  property :season,         String,   :length  => 255
-  property :season_episode, String,   :length  => 255
-  property :product_number, String,   :length  => 255
-  property :air_date,       Date
-  property :url,            Text
-  property :title,          String,   :length  => 255
-  property :tvr_show_id,    String,   :length  => 255
-  property :watched,        Boolean, :default => false
-  timestamps :at
 
   def self.pad_num(num)
     ret = '00'
@@ -26,10 +13,9 @@ class Episode < Sequel::Model
     ret
   end
 
-  def self.populate_episodes(show, xml_document)
-    Episode.all(:show_id => shows.map(&:id)).destroy
+  def self.populate_episodes(show, xml)
 
-    xml_document.css('Show Episodelist Season').each do |season|
+    xml.css('Show Episodelist Season').each do |season|
       season.css("episode").each do |episode|
         epnum     = episode.at_css("epnum").content
         season_no = season['no']
@@ -39,7 +25,7 @@ class Episode < Sequel::Model
         link      = episode.at_css("link").content
         title     = episode.at_css("title").content
 
-        episode = Episode.new({
+        episode = Episode.where(:episode => epnum).first || Episode.new(
           :season         => season_no,
           :episode        => epnum,
           :season_episode => seasonnum,
@@ -48,9 +34,9 @@ class Episode < Sequel::Model
           :air_date       => airdate,
           :title          => title,
           :tvr_show_id    => show.tvr_show_id
-        })
+        )
 
-        show.episodes << episode
+        show.add_episode(episode)
 
         if episode.save
           Rails.logger.info "new episode saved #{episode.id}"
@@ -65,14 +51,14 @@ class Episode < Sequel::Model
     counter = 0
     failed_shows = []
 
-    shows = tvr_show_id ? Show.all(:tvr_show_id => tvr_show_id) : Show.all
+    shows = tvr_show_id ? Show.where(:tvr_show_id => tvr_show_id).all : Show.all
 
     shows.each do |show|
       counter = 0
 
       while counter < 5
         Rails.logger.info "Try #{counter + 1} to get #{show.name}"
-        response = Typhoeus::Request.get(Typhoeus::Request.new("http://services.tvrage.com/feeds/episode_list.php?sid=#{show.tvr_show_id}", {:timeout => 600000}))
+        response = Typhoeus::Request.get("http://services.tvrage.com/feeds/episode_list.php?sid=#{show.tvr_show_id}", {:timeout => 600000})
 
         if response.success?
           Rails.logger.info "#{show.name} success"

@@ -4,7 +4,7 @@ module Seeds
     end
 
     def self.load
-      password = SecureRandom.hex(16)
+      password = ENV['PASSWORD'] || SecureRandom.hex(16)
       user = User.create(
         :email                 => "philip@ivercore.com",
         :password              => password,

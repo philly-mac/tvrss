@@ -1,7 +1,7 @@
 !!! Strict
 %html{:lang => 'en'}
   %head
-    %title IverCore TV Rss
+    %title TV Rss
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %link{:href => "/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
     = stylesheet_link_tag    'application'
@@ -10,4 +10,5 @@
   %body
     = render :partial => 'shared/flash', :object => flash
     = render :partial => 'shared/menu'
-    .container-fluid= yield
+    .container-fluid
+      .span9= yield

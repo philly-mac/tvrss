@@ -1,10 +1,10 @@
 - if logged_in?
-  .sidebar-nav.well
-    %ul.nav.nav-list
-    %ul
-      %li= link_to('Home', shows_path)
-      %li |
-      %li= link_to('Reimport All Episodes', reimport_episodes_path)
-      %li= link_to('Reimport All Show Info', reimport_shows_path)
-      %li= link_to('Cancelled Shows', cancelled_shows_path)
-      %li= link_to('Logout', logout_path) if logged_in?
+  .span3
+    .sidebar-nav.well
+      %ul.nav.nav-list
+      %ul
+        %li= link_to('Home', user_shows_path(current_user))
+        %li= link_to('Cancelled Shows', cancelled_user_shows_path(current_user))
+        - if can? :manage, Show
+          %li= link_to 'Admin', admin_path
+        %li= link_to('Logout', logout_path) if logged_in?

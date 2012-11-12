@@ -17,7 +17,7 @@
       %td{:colspan => 2}= submit_tag 'search'
 
 %h2 Show Search
-= form_tag search_shows_path, :method => :get do
+= form_tag search_user_shows_path(current_user), :method => :get do
   %table.borders
     %tr
       %td.name Show Name
@@ -30,7 +30,7 @@
     - @searched_shows.each do |searched_show|
       %tr
         %td= link_to(searched_show[:name], searched_show[:url], :target => '_blank')
-        %td= button_to('add', shows_path(:"show[tvr_show_id]" => searched_show[:tvr_show_id]), :method => :post)
+        %td=# button_to('add', shows_path(:"show[tvr_show_id]" => searched_show[:tvr_show_id]), :method => :post)
 
 - if @shows
   %h2= "Current Shows (#{@shows.size})"

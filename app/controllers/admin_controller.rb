@@ -1,6 +1,11 @@
 class AdminController < ApplicationController
 
   before_filter :authenticate_user!
+  before_filter :authorize_admin
+
+  def index
+    render 'admin/index'
+  end
 
   def new
     render :action => 'index'
@@ -29,6 +34,24 @@ class AdminController < ApplicationController
     redirect_to shows_path
   end
 
+  def search_shows
+    render 'admin/search'
+  end
+
+  def find_shows
+    if (@shows = Show.search_tv_rage(params[:search_term])).empty?
+      flash[:alert] = "Something went wrong getting the shows data"
+    end
+
+    render 'admin/search'
+  end
+
+  def add_show
+    @show = Show.new(:tvr_show_id => params[:tvr_id])
+    @show.save ? notice = 'Saved' : alert = "Error"
+    redirect_to admin_path
+  end
+
   def reimport_show
     Show.fill_in_show_information(params[:tvr_show_id])
     redirect_to shows_path
@@ -46,5 +69,14 @@ class AdminController < ApplicationController
       flash[:alert] = "Something went wrong"
     end
     redirect_to shows_path
+  end
+
+private
+
+  def authorize_admin
+    unless can? :manage, Show
+      redirect root_path
+      return
+    end
   end
 end

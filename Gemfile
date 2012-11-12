@@ -19,9 +19,10 @@ gem 'nulogy-sequel-rails', :git => 'git://github.com/nulogy/sequel-rails.git'
 gem 'pg'
 
 # Component requirements
+gem 'whiskey_disk'
 gem 'cancan'
+gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'simple_auth', :git => 'git://github.com/philly-mac/simple_auth.git'
-gem 'bcrypt-ruby',            :require => "bcrypt"
 gem 'hpricot'
 gem 'ruby_parser'
 gem "bundler"
