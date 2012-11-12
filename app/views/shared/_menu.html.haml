@@ -1,10 +1,10 @@
 - if logged_in?
-  .span3
+  .span2
     .sidebar-nav.well
       %ul.nav.nav-list
       %ul
         %li= link_to('Home', user_shows_path(current_user))
-        %li= link_to('Cancelled Shows', cancelled_user_shows_path(current_user))
+        %li= link_to('Cancelled', cancelled_user_shows_path(current_user))
         - if can? :manage, Show
           %li= link_to 'Admin', admin_path
         %li= link_to('Logout', logout_path) if logged_in?
