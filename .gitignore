@@ -6,6 +6,7 @@ vendor/ruby
 log/**/*
 tmp/**/*
 vendor/gems/*
+vendor/cache
 !vendor/gems/cache/
 .sass-cache/*
 db/*.db
