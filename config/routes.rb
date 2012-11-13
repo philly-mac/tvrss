@@ -1,6 +1,6 @@
 Tvrss::Application.routes.draw do
 
-  root :to => 'sessions#index'
+  root :to => 'shows#index'
 
   # Sessions
   resources :sessions, :only => [:index, :new, :create, :destroy]

@@ -4,6 +4,7 @@
       %ul.nav.nav-list
       %ul
         %li= link_to('Shows', shows_path)
+        %li= link_to('Unwatched', shows_path)
         %li= link_to('Cancelled', cancelled_shows_path)
         - if can? :manage, Show
           %li= link_to 'Admin', admin_path

@@ -28,29 +28,19 @@ Sponsored by Heroku ;)
 Depending on whether you have the required tools installed on your machine, you can get this app installed and usable in 30 seconds.
 Heres how.
 
-## prerequisites
-
-- ruby (rvm is the best and easiest way to install this)
-- rubygems
-- bundler
-- git
-
-Everything should be installed automatically with the code below.
-You may find that you have to install some other libraries for nokogiri which I use for the xml parsing
-
     git clone git://github.com/philly-mac/tvrss.git
     cd tvrss
     bundle install
     bundle exec rake db:create
-    bundle exec rake db:automigrate
+    bundle exec rake db:migrate
+    bundle exec rake db:seed EMAIL=user@test.com PASSWORD=password
     bundle exec rails start
 
 
 Then browse to http://localhost:3000/
 
-default username = username
-
-default password = password
+    default username = =user@test.com
+    default password = password
 
 Enjoy tvrss!
 
@@ -63,17 +53,6 @@ Enjoy tvrss!
 - Delete a show from the database, will also remove all episodes
 - Show an rss feed of all episodes of all shows in your database between two dates
 
-# technologies
 
-This is a list of technologies I used to build this app
-
-- git (of course)
-- ruby
-- rails 3
-- sqlite
-- nokogiri
-- jQuery
-- haml
-- sass
 - www.tvrage.com xml service for the data
 
