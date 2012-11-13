@@ -27,7 +27,7 @@ Heres how.
     bundle install
     bundle exec rake db:create
     bundle exec rake db:migrate
-    bundle exec rake db:seed EMAIL=user@test.com PASSWORD=password
+    bundle exec rake db:seed EMAIL=YOUR@EMAIL.com PASSWORD=password
     bundle exec rails start
 
 
