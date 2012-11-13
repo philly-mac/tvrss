@@ -79,7 +79,7 @@ class AdminController < ApplicationController
 private
 
   def authorize_admin
-    unless can? :manage, Show
+    unless current_user.has_role?(:super_user)
       redirect root_path
       return
     end
