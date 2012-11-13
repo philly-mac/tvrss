@@ -17,9 +17,6 @@ Sequel.migration do
       foreign_key :show_id, :shows
     end
 
-    create_table(:watched_episodes_users) do
-      foreign_key :episode_id, :episodes
-      foreign_key :user_id,    :users
-    end
+    create_join_table(:episode_id => :episodes, :user_id => :users)
   end
 end

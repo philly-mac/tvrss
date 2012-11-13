@@ -4,7 +4,7 @@ module ApplicationHelper
        if rss
          "#{show.name} Episodes <=> #{show.url}"
        else
-         "#{link_to("#{show.name} Episodes", show.url)}<br /> #{link_to("rss", episode_path(show.id, :format => :rss))}"
+         "#{link_to("#{show.name} Episodes", show.url)}<br /> #{link_to("rss", show_episodes_path(show, :format => :rss))}"
       end
     else
       fmt = "%a, %d/%m/%Y"

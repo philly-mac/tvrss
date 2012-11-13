@@ -16,14 +16,23 @@ Tvrss::Application.routes.draw do
   post 'admin/shows/add'         => 'admin#add_show'
   get  'admin/episodes/reimport' => 'admin#reimport_episodes'
 
-  resources :users do
-    resources :shows do
-      collection do
-        get :search
-        get :cancelled
-      end
+  resources :shows do
 
-      resources :episodes
+    member do
+      post :add
+      put  :watched
+    end
+
+    collection do
+      get :search
+      get :cancelled
+    end
+
+    resources :episodes do
+      member do
+        put  :watched
+        put  :unwatched
+      end
     end
   end
 end

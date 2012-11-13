@@ -1,11 +1,19 @@
 %h1 TV Shows RSS
-%h2!= title_description(@show, @from_date, @to_date)
+
+%legend
+  != title_description(@show, @from_date, @to_date)
 
 - counter = @episodes.size
 
 - @episodes.each do |episode|
   .episode
     %h3.title= title(counter, episode)
+    - if episode.watched?(current_user)
+      %span.label.label-success Watched
+      = button_to('Mark unwatched', unwatched_show_episode_path((@show || episode.show), episode), :method => :put, :remote => true, :class => 'btn btn-info')
+    - else
+      %span.label.label-important Unwatched
+      = button_to('Mark watched', watched_show_episode_path((@show || episode.show), episode), :method => :put, :remote => true, :class => 'btn btn-info')
     %p.description!=  description(episode)
     %br/
   - counter -= 1

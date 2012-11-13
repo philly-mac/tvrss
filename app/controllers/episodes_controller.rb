@@ -1,13 +1,14 @@
 class EpisodesController < ApplicationController
 
   before_filter :authenticate_user!
+  before_filter :load_episode, :except => [:index, :calendar]
 
-  load_and_authorize_resource :show, :except => [:calendar]
-  load_and_authorize_resource :episode, :through => :show, :except => [:calendar]
+  def index
+    @show = Show.where(:id => params[:show_id]).first
+    @episodes = @show.episodes_dataset
+      .order(Sequel.desc(:air_date))
+      .all
 
-  def show
-    @show = Show.get params[:id]
-    @episodes = @show.episodes(:order => [ :air_date.desc ])
     respond_to do |format|
       format.html { render :action => 'show' }
       format.rss  { render :action => 'show' }
@@ -16,13 +17,13 @@ class EpisodesController < ApplicationController
 
   def calendar
     @from_date = Date.parse(params[:from_date])
-    @to_date = Date.parse(params[:to_date])
+    @to_date   = Date.parse(params[:to_date])
 
-    @episodes = Episode.all(
-      :air_date.gte => @from_date,
-      :air_date.lte => @to_date,
-      :order => [ :air_date.desc ]
-    )
+    @episodes = Episode
+      .where(:air_date => @from_date..@to_date)
+      .where(:show_id => current_user.shows.map(&:id))
+      .order(Sequel.desc(:air_date))
+      .all
 
     respond_to do |format|
       format.html { render :action => 'show' }
@@ -30,6 +31,27 @@ class EpisodesController < ApplicationController
     end
   end
 
+  def watched
+    unless @episode.users_dataset.where(:id => current_user.id).first
+      @episode.add_user(current_user)
+    end
 
+    render :nothing => true
+  end
+
+  def unwatched
+    if @episode.users_dataset.where(:id => current_user.id).first
+      @episode.remove_user(current_user)
+    end
+
+    render :nothing => true
+  end
+
+private
+
+  def load_episode
+    @episode = Episode.where(:id => params[:id]).first
+  end
 end
+
 

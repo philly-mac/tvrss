@@ -7,7 +7,7 @@ class User < Sequel::Model
 
   many_to_many :roles
   many_to_many :shows
-  many_to_many :watched_episodes, :join_table => :watched_shows_users
+  many_to_many :episodes
 
   def add_role(role)
 

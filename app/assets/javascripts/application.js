@@ -10,7 +10,9 @@ $(document).ready(function() {
     dateFormat: "yy-mm-dd",
   });
 
-  $("#from_date").datepicker();
-  $("#to_date").datepicker();
-
+  $("body").on('focus', ".datepicker", function(event) {
+    event.preventDefault();
+    $(this).attr("id","datepicker-" + new Date().toString());
+    $('.datepicker').datepicker();
+  });
 });

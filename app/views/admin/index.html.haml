@@ -1,3 +1,22 @@
 = link_to('Search for Shows', admin_shows_search_path)
-= link_to('Reimport All Show Info', admin_shows_reimport_path)
-= link_to('Reimport All Episodes', admin_episodes_reimport_path)
+
+- if @shows
+  %legend
+    = "Shows"
+    = "(#{@shows.size})"
+  %table.table.table-striped
+    %tr
+      %th &nbsp;
+      %th Show
+      %th Reimport show info
+      %th Reimport Episodes
+      %th Del
+
+    - @shows.each_with_index do |show, index|
+      %tr
+        %td= "#{index + 1}."
+        %td= link_to(show.name, show_episodes_path(show))
+        %td= link_to('Reimport Show Info', admin_shows_reimport_path(:id => show.id))
+        %td= link_to('Reimport Episodes', admin_episodes_reimport_path(:id => show.id))
+        %td= button_to('del', url_for(:action => 'destroy', :controller => 'shows',:id => show.id), :method => :delete, :confirm => "Delete #{show.name} are you sure?")
+

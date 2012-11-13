@@ -3,8 +3,8 @@
     .sidebar-nav.well
       %ul.nav.nav-list
       %ul
-        %li= link_to('Home', user_shows_path(current_user))
-        %li= link_to('Cancelled', cancelled_user_shows_path(current_user))
+        %li= link_to('Shows', shows_path)
+        %li= link_to('Cancelled', cancelled_shows_path)
         - if can? :manage, Show
           %li= link_to 'Admin', admin_path
         %li= link_to('Logout', logout_path) if logged_in?

@@ -4,6 +4,7 @@ class AdminController < ApplicationController
   before_filter :authorize_admin
 
   def index
+    @shows = Show.order(:name).all
     render 'admin/index'
   end
 
@@ -52,21 +53,25 @@ class AdminController < ApplicationController
     redirect_to admin_path
   end
 
-  def reimport_show
-    Show.fill_in_show_information(params[:tvr_show_id])
-    redirect_to shows_path
+  def reimport_shows
+    if show = Show.where(:id => params[:id]).first
+      Show.populate_fields([show])
+    end
+
+    redirect_to admin_path
   end
 
   def load_shows
     @shows = Show.all(:order => [ :name.asc])
   end
 
-
-  def reimport_edisode
-    if Episode.import_episodes(params[:tvr_show_id])
-      flash[:notice] = "Successful"
-    else
-      flash[:alert] = "Something went wrong"
+  def reimport_edisodes
+    if show = Show.where(:id => params[:id]).first
+      if Episode.import([show])
+        flash[:notice] = "Successful"
+      else
+        flash[:alert] = "Something went wrong"
+      end
     end
     redirect_to shows_path
   end

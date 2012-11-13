@@ -1,23 +1,7 @@
-%div.section
-  %h1 Shows
+%h1 Shows
 
-%h2 Episode Search
-= form_tag calendar_path, :method => :get do
-  %table
-    %tr
-      %td.name
-        From
-        %br/
-        = text_field_tag :from_date, (Date.today - 7), :id => 'from_date'
-      %td.name
-        To
-        %br/
-        = text_field_tag :to_date, (Date.today - 1), :id => 'to_date'
-    %tr
-      %td{:colspan => 2}= submit_tag 'search'
-
-%h2 Show Search
-= form_tag search_user_shows_path(current_user), :method => :get do
+%legend Show Search
+= form_tag search_shows_path(current_user), :method => :get do
   %table.borders
     %tr
       %td.name Show Name
@@ -27,41 +11,43 @@
 - if @searched_shows
   %h2 Search Results
   %table
-    - @searched_shows.each do |searched_show|
+    - @searched_shows.each do |show|
       %tr
-        %td= link_to(searched_show[:name], searched_show[:url], :target => '_blank')
-        %td=# button_to('add', shows_path(:"show[tvr_show_id]" => searched_show[:tvr_show_id]), :method => :post)
+        %td= link_to(show.name, show.url, :target => '_blank')
+        %td= button_to('add', add_show_path(show), :method => :post)
+
+%legend Episode Search
+= form_tag calendar_path, :method => :get do
+  %table
+    %tr
+      %td.name
+        From
+        %br/
+        = text_field_tag :from_date, (Date.today - 7), :class => 'datepicker', :readonly => true
+      %td.name
+        To
+        %br/
+        = text_field_tag :to_date, (Date.today - 1), :class => 'datepicker', :readonly => true
+    %tr
+      %td= submit_tag 'search'
 
 - if @shows
-  %h2= "Current Shows (#{@shows.size})"
-  %table.borders
+  %legend
+    = "Your Current Shows"
+    = "(#{@shows.size})"
+  %table.table.table-striped
     %tr
-      %td &nbsp;
-      %td Show
-      %td rss
-      %td Search As
-      %td Reimport Episode Info
-      %td Update Show Info
-      %td Del
-    - change = false
-    - i = 1
-    - @shows.each do |show|
+      %th &nbsp;
+      %th Show
+      %th rss
+      %th Watched
+      %th Del
+
+    - @shows.each_with_index do |show, index|
       %tr
-        %td.num_index= "#{i}."
-        %td.name{:class => change ? 'highlight' : '' }
-          = link_to(show.name, episode_path(show.id))
-        %td{:class => change ? 'highlight' : '' }
-          = link_to("rss", episode_path(:format => :rss, :id => show.id))
-        %td.search_as{:class => change ? 'highlight' : '' }
-          = form_tag url_for(:controller => "shows", :action => "update", :id => show.id), :method => :put do
-            = text_field_tag "show[search_as]", search_name(show)
-            = submit_tag 'set'
-        %td.name{:class => change ? 'highlight' : '' }
-          = link_to('Reimport Episode Info', reimport_episode_path(show.tvr_show_id))
-        %td.name{:class => change ? 'highlight' : '' }
-          = link_to('Update Show Info', reimport_show_path(show.tvr_show_id))
-        %td{:class => change ? 'highlight' : '' }
-          = button_to('del', url_for(:action => 'destroy', :controller => 'shows',:id => show.id), :method => :delete, :confirm => 'Are you sure?')
-      - change = !change
-      - i += 1
+        %td= "#{index + 1}."
+        %td= link_to(show.name, show_episodes_path(show))
+        %td= link_to("rss", show_episodes_path(show, :format => :rss))
+        %td= button_to('All Watched', watched_show_path(show), :method => :put, :remote => true, :confirm => "Mark all episodes of #{show.name} watched?")
+        %td= button_to('del', url_for(:action => 'destroy', :controller => 'shows',:id => show.id), :method => :delete, :confirm => "Delete #{show.name} are you sure?")
 

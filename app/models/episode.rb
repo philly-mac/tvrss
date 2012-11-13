@@ -1,6 +1,7 @@
 class Episode < Sequel::Model
 
   many_to_one :show
+  many_to_many :users
 
   def self.pad_num(num)
     ret = '00'
@@ -13,7 +14,7 @@ class Episode < Sequel::Model
     ret
   end
 
-  def self.populate_episodes(show, xml)
+  def self.populate(show, xml)
 
     xml.css('Show Episodelist Season').each do |season|
       season.css("episode").each do |episode|
@@ -25,7 +26,7 @@ class Episode < Sequel::Model
         link      = episode.at_css("link").content
         title     = episode.at_css("title").content
 
-        episode = Episode.where(:episode => epnum).first || Episode.new(
+        episode = Episode.where(:tvr_show_id => show.tvr_show_id, :episode => epnum).first || Episode.new(
           :season         => season_no,
           :episode        => epnum,
           :season_episode => seasonnum,
@@ -47,11 +48,9 @@ class Episode < Sequel::Model
     end
   end
 
-  def self.import_episodes(tvr_show_id = nil)
+  def self.import(shows = nil)
     counter = 0
     failed_shows = []
-
-    shows = tvr_show_id ? Show.where(:tvr_show_id => tvr_show_id).all : Show.all
 
     shows.each do |show|
       counter = 0
@@ -62,7 +61,7 @@ class Episode < Sequel::Model
 
         if response.success?
           Rails.logger.info "#{show.name} success"
-          populate_episodes(show, Nokogiri::XML(response.body))
+          populate(show, Nokogiri::XML(response.body))
           break
         else
           Rails.logger.info "HTTP request failed: " + response.code.to_s
@@ -81,6 +80,13 @@ class Episode < Sequel::Model
     end
 
     failed_shows
+  end
+
+  def watched?(user)
+    puts "CHECKING #{id}"
+    res = self.users_dataset.where(:id => user.id).first
+    puts res.inspect
+    res.present?
   end
 
 end
