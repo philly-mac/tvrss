@@ -17,12 +17,6 @@ is complicated, crowded and just didn't serve my needs. I need a balance of the 
 I am a developer, so I thought, why don't I just write a small web app that would do exactly what I want, using the data service from
 tvrage.com. So that is what I did.
 
-# Demo
-
-Sponsored by Heroku ;)
-
-[http://ivercore-tvrss.heroku.com/](http://ivercore-tvrss.heroku.com)
-
 # 30 (or thereabouts) Second Install
 
 Depending on whether you have the required tools installed on your machine, you can get this app installed and usable in 30 seconds.
@@ -39,7 +33,7 @@ Heres how.
 
 Then browse to http://localhost:3000/
 
-    default username = =user@test.com
+    default username = user@test.com
     default password = password
 
 Enjoy tvrss!
