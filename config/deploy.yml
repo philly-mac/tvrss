@@ -7,7 +7,7 @@ production:
   repository: "git@github.com:philly-mac/tvrss.git"
   post_setup_script: "bin/post-setup.sh"
   post_deploy_script: "bin/post-deploy.sh"
-  branch: "deploy"
+  branch: "master"
   rake_env:
     RAILS_ENV: "production"
     DEPLOY_DIR: "tvrss.ivercore.com"
